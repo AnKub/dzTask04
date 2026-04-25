@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Orders & Products SPA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Невеликий SPA-проєкт для обліку замовлень, товарів і груп товарів. Проєкт зроблений на React + TypeScript, стилі написані на SCSS, глобальний стан винесений у Redux Toolkit, а навігація побудована через React Router.
 
-## Available Scripts
+У поточному стані застосунок має сторінки Orders, Products і Groups, верхню панель з пошуком та блоком дати/часу, лівий сайдбар, спільну модель даних для замовлень і груп, а також моковий service-layer як підготовку під майбутнє API.
 
-In the project directory, you can run:
+## Запуск
 
-### `npm start`
+Після клонування достатньо встановити залежності та підняти клієнт:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm install
+npm start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Основний застосунок відкривається на http://localhost:3000.
 
-### `npm test`
+Для лічильника активних сесій окремо запускається socket-сервер:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm run socket-server
+```
 
-### `npm run build`
+Для перевірки збірки:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Для тестів:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm test
+```
 
-### `npm run eject`
+## Що реалізовано
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+З боку звичайного junior-рівня тут уже є базовий SPA на React з TypeScript, роутинг між сторінками, компонентна структура, Redux store, сторінки зі списками даних, фільтрація і пошук, адаптивна верстка, SCSS-стилізація, а також робота з моковими даними. Дані пов’язані між собою через orderId і groupId, тому Orders, Products і Groups працюють не як ізольовані сторінки, а як частини однієї моделі.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+З боку junior+ тут уже є кілька речей, які виходять за межі простого CRUD на моках. Сторінки підключені через lazy loading, тому код ділиться на окремі чанки і не вантажиться весь одразу. Дані читаються не напряму з mock-файлів, а через окремий service-layer у `src/services/inventoryDataService.ts`, що спрощує майбутню заміну моків на реальний API. Для ключових частин логіки додані unit-тести: окремо перевіряється service-layer і окремо reducer для productsSlice. Також є socket.io-сервер для показу активних сесій у top bar, а частина дрібних оптимізацій зроблена для зменшення зайвих перерендерів.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Окремо в проєкті вже виконані прикладні оптимізації продуктивності. Обрахунки для фільтрації, мап зв’язків між сутностями, пошукових результатів і похідних списків винесені в memoized-обчислення, щоб не перераховувати їх на кожен ререндер. Сторінки підвантажуються через lazy loading, тому стартовий bundle менший. Блок дати й часу оновлюється не щосекунди, а синхронізується по хвилинах, що зменшує шум ререндерів у header. Оновлення кількості активних сесій іде через websocket, але стан змінюється лише коли значення реально відрізняється, а логіка підключення налаштована без агресивних перепідключень. У сумі це робить інтерфейс спокійнішим і дешевшим по зайвих оновленнях.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Як це організовано
 
-## Learn More
+Роутинг і lazy loading зібрані в `src/App.tsx`. Дані для store ініціалізуються через `src/services/inventoryDataService.ts`. Стан розкладений по slices у `src/store`. Основний UI лежить у `src/components`, а сторінки винесені в `src/pages`. Моки залишаються в `src/mock`, але вже не є прямою точкою входу для сторінок і reducers.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Тести і перевірка
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+На цій стадії є unit-тести для service-layer і для reducer-логіки productsSlice. Вони перевіряють, що сервіс повертає окремі копії даних, що snapshot містить повний набір сутностей, що видалення продукту працює по id і що додавання нового продукту створює очікувані дефолтні поля.
+
+Остання перевірка пройшла успішно: production build зібрався без помилок, а нові тести не зламали проєкт.

@@ -1,0 +1,66 @@
+@use '../../styles/card' as *;
+
+.group-card {
+  @extend .card-base;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 70px 92px;
+  align-items: center;
+  margin-bottom: 0;
+  // gap: 10px;
+  text-align: left;
+  border: 1px solid #d9e2ec;
+  background: #fff;
+
+  &--active {
+    border-color: #84cc16;
+    box-shadow: 0 10px 28px rgba(132, 204, 22, 0.18);
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23008000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect y="3" width="20" height="2"/><rect y="9" width="20" height="2"/><rect y="15" width="20" height="2"/></svg>') center/contain no-repeat;
+  }
+
+  &__name {
+    min-width: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #111827;
+  }
+
+  &__count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  &__count-label,
+  &__date-secondary {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    font-weight: 400;
+  }
+
+  &__date {
+    display: flex;
+    flex-direction: column;
+    color: #334155;
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 991px) {
+    grid-template-columns: 24px 1fr;
+
+    &__count,
+    &__date {
+      justify-self: start;
+    }
+  }
+}

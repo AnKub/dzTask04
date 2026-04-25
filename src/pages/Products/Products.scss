@@ -1,0 +1,33 @@
+.products-page {
+  min-width: 0;
+
+  &__header {
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  &__title-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #84cc16;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  &__list {
+    display: grid;
+    gap: 5px;
+  }
+}

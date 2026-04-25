@@ -1,0 +1,29 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &__icon {
+    width: 32px;
+    height: 32px;
+    background: #008000;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,128,0,0.15);
+    display: inline-block;
+  }
+  &__text {
+    color: #008000;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+    cursor: pointer;
+    &:hover {
+      color: #005c00;
+    }
+    &--hide-mobile {
+      @media (max-width: 760px) {
+        display: none;
+      }
+    }
+  }
+}
