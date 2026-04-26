@@ -79,6 +79,11 @@ const Products: React.FC = () => {
 		]
 	);
 
+	const deleteProduct = useMemo(
+		() => products.find((product) => product.id === deleteId) ?? null,
+		[deleteId, products]
+	);
+
 	const handleDelete = (id: string) => {
 		setDeleteId(id);
 	};
@@ -125,6 +130,7 @@ const Products: React.FC = () => {
 				open={!!deleteId}
 				onClose={() => setDeleteId(null)}
 				onConfirm={handleConfirmDelete}
+				text={deleteProduct ? `Вы действительно хотите удалить продукт "${deleteProduct.name}"?` : undefined}
 			/>
 		</section>
 	);

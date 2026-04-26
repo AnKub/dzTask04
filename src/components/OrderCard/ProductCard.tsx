@@ -79,8 +79,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <button
             className="product-card__group-link"
             type="button"
-            aria-label={groupName ? `Открыть группу ${groupName}` : 'Открыть группу'}
-            onClick={() => onGroupOpen?.(product.groupId)}
+            aria-label={orderName ? `Открыть товары прихода ${orderName}` : 'Открыть товары прихода'}
+            onClick={() => onGroupOpen?.(product.orderId)}
           >
             <span className="product-card__group-link-icon" aria-hidden="true" />
             <span className="product-card__group-link-count">{groupCount ?? 0}</span>

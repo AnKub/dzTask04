@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../../components/OrderCard/ProductCard';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -12,8 +12,8 @@ import './Orders.scss';
 
 const Orders: React.FC = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.items);
   const groups = useAppSelector((state) => state.groups.items);
@@ -32,9 +32,9 @@ const Orders: React.FC = () => {
     () => new Map(orders.map((order: Order) => [order.id, order.date])),
     [orders]
   );
-  const groupCounts = useMemo(
+  const orderProductCounts = useMemo(
     () => products.reduce((counts, product) => {
-      counts.set(product.groupId, (counts.get(product.groupId) ?? 0) + 1);
+      counts.set(product.orderId, (counts.get(product.orderId) ?? 0) + 1);
       return counts;
     }, new Map<string, number>()),
     [products]
@@ -69,33 +69,84 @@ const Orders: React.FC = () => {
   };
   const handleCloseModal = () => setDeleteId(null);
 
+  const selectedOrder = useMemo(
+    () => orders.find((order) => order.id === selectedOrderId) ?? null,
+    [orders, selectedOrderId]
+  );
+
+  const selectedOrderProducts = useMemo(
+    () => (selectedOrderId ? filtered.filter((product) => product.orderId === selectedOrderId) : []),
+    [filtered, selectedOrderId]
+  );
+
+  const deleteProduct = useMemo(
+    () => products.find((product) => product.id === deleteId) ?? null,
+    [deleteId, products]
+  );
+
   return (
     <section className="orders-page">
       <div className="orders-page__header">
         <div className="orders-page__title">
           <span className="orders-page__title-badge">+</span>
-          <span>Приходы / {filtered.length}</span>
+          <span>{selectedOrder ? `Приход: ${selectedOrder.name}` : `Приходы / ${filtered.length}`}</span>
         </div>
       </div>
-      <div className="orders-page__list">
-        {filtered.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            groupName={groupNames.get(product.groupId)}
-            orderName={orderNames.get(product.orderId)}
-            orderDate={orderDates.get(product.orderId)}
-            groupCount={groupCounts.get(product.groupId)}
-            variant="orders"
-            onGroupOpen={(groupId) => navigate(`/groups?groupId=${groupId}`)}
-            onDelete={handleDelete}
-          />
-        ))}
+      <div className="orders-page__stage" key={selectedOrderId ?? 'orders-list'}>
+        {selectedOrder ? (
+          <>
+            <div className="orders-page__toolbar">
+              <button
+                type="button"
+                className="orders-page__back-btn"
+                onClick={() => setSelectedOrderId(null)}
+                aria-label="Вернуться к списку приходов"
+              >
+                <span className="orders-page__back-icon" aria-hidden="true" />
+              </button>
+              <div className="orders-page__summary">
+                <span>{selectedOrderProducts.length} товаров</span>
+                <span>{selectedOrderProducts.reduce((total, product) => total + product.priceUSD, 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} USD</span>
+                <span>{selectedOrderProducts.reduce((total, product) => total + product.priceUAH, 0).toLocaleString('uk-UA', { style: 'currency', currency: 'UAH', minimumFractionDigits: 0 })}</span>
+              </div>
+            </div>
+            <div className="orders-page__products">
+              {selectedOrderProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  groupName={groupNames.get(product.groupId)}
+                  orderName={orderNames.get(product.orderId)}
+                  orderDate={orderDates.get(product.orderId)}
+                  variant="products"
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="orders-page__list">
+            {filtered.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                groupName={groupNames.get(product.groupId)}
+                orderName={orderNames.get(product.orderId)}
+                orderDate={orderDates.get(product.orderId)}
+                groupCount={orderProductCounts.get(product.orderId)}
+                variant="orders"
+                onGroupOpen={(orderId) => setSelectedOrderId(orderId)}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+        )}
       </div>
       <ConfirmModal
         open={!!deleteId}
         onClose={handleCloseModal}
         onConfirm={handleConfirmDelete}
+        text={deleteProduct ? `Вы действительно хотите удалить продукт "${deleteProduct.name}"?` : undefined}
       />
     </section>
   );

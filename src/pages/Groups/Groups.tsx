@@ -54,6 +54,11 @@ const Groups: React.FC = () => {
 		[products]
 	);
 
+	const deleteProduct = useMemo(
+		() => products.find((product) => product.id === deleteId) ?? null,
+		[deleteId, products]
+	);
+
 	const handleConfirmDelete = () => {
 		if (deleteId) {
 			dispatch(removeProduct(deleteId));
@@ -119,7 +124,12 @@ const Groups: React.FC = () => {
 				)}
 			</div>
 
-			<ConfirmModal open={!!deleteId} onClose={() => setDeleteId(null)} onConfirm={handleConfirmDelete} />
+			<ConfirmModal
+				open={!!deleteId}
+				onClose={() => setDeleteId(null)}
+				onConfirm={handleConfirmDelete}
+				text={deleteProduct ? `Вы действительно хотите удалить продукт "${deleteProduct.name}"?` : undefined}
+			/>
 			<AddProductModal
 				open={isAddModalOpen}
 				groupName={selectedGroup?.name ?? 'группы'}

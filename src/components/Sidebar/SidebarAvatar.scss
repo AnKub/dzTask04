@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 32px;
+
   &__img {
     width: 80px;
     height: 80px;
@@ -15,13 +16,25 @@
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   &__gear {
     position: absolute;
     right: 8px;
-    bottom: 12px;
-    width: 22px;
-    height: 22px;
-    background: #008000;
+    bottom: 7px;
+    width: 20px;
+    height: 20px;
+  background: #fff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236b7280"><path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.6-.22l-2.39.96a7.03 7.03 0 00-1.63-.94l-.36-2.54A.5.5 0 0013.9 1h-3.8a.5.5 0 00-.49.42l-.36 2.54c-.58.22-1.12.53-1.63.94l-2.39-.96a.5.5 0 00-.6.22L2.71 7.48a.5.5 0 00.12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 00-.12.64l1.92 3.32a.5.5 0 00.6.22l2.39-.96c.5.41 1.05.72 1.63.94l.36 2.54a.5.5 0 00.49.42h3.8a.5.5 0 00.49-.42l.36-2.54c.58-.22 1.12-.53 1.63-.94l2.39.96a.5.5 0 00.6-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px 18px;
     border-radius: 50%;
     display: flex;
     align-items: center;
