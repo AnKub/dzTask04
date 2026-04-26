@@ -18,6 +18,11 @@
   transition: margin-left 0.3s ease, padding 0.3s ease;
 }
 
+.route-view {
+  min-width: 0;
+  will-change: opacity, transform;
+}
+
 .route-loader {
   min-height: 160px;
   display: flex;

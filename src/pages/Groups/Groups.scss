@@ -14,18 +14,6 @@
     color: #111827;
   }
 
-  // &__title-badge {
-  //   width: 24px;
-  //   height: 24px;
-  //   border-radius: 50%;
-  //   background: #84cc16;
-  //   color: #fff;
-  //   display: inline-flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-weight: 700;
-  // }
-
   &__sidebar,
   &__content,
   &__panel {
@@ -39,10 +27,8 @@
   }
 
   &__panel {
-    // background: #f8fdff;
     border-radius: 18px;
     padding: 20px;
-    // box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
     min-height: 360px;
     opacity: 0;
     transform: translateX(20px);

@@ -4,8 +4,9 @@ import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import AddProductModal from '../../components/Groups/AddProductModal';
 import GroupCard from '../../components/Groups/GroupCard';
 import ProductCard from '../../components/OrderCard/ProductCard';
+import useDeleteProductModal from '../../hooks/useDeleteProductModal';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addProduct, removeProduct } from '../../store/productsSlice';
+import { addProduct } from '../../store/productsSlice';
 import './Groups.scss';
 
 type AddProductFormPayload = {
@@ -28,8 +29,8 @@ const Groups: React.FC = () => {
 	const products = useAppSelector((state) => state.products.items);
 	const orders = useAppSelector((state) => state.orders.items);
 	const [selectedGroupId, setSelectedGroupId] = useState<string | null>(groups[0]?.id ?? null);
-	const [deleteId, setDeleteId] = useState<string | null>(null);
 	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+	const { deleteId, requestDelete, closeDeleteModal, confirmDelete, confirmText } = useDeleteProductModal(products);
 	const requestedGroupId = searchParams.get('groupId');
 
 	useEffect(() => {
@@ -53,18 +54,6 @@ const Groups: React.FC = () => {
 		}, new Map<string, number>()),
 		[products]
 	);
-
-	const deleteProduct = useMemo(
-		() => products.find((product) => product.id === deleteId) ?? null,
-		[deleteId, products]
-	);
-
-	const handleConfirmDelete = () => {
-		if (deleteId) {
-			dispatch(removeProduct(deleteId));
-			setDeleteId(null);
-		}
-	};
 
 	const handleAddProduct = (payload: AddProductFormPayload) => {
 		if (!selectedGroupId) return;
@@ -113,7 +102,7 @@ const Groups: React.FC = () => {
 
 						{groupProducts.length ? (
 							groupProducts.map((product) => (
-								<ProductCard key={product.id} product={product} variant="groups" onDelete={setDeleteId} />
+								<ProductCard key={product.id} product={product} variant="groups" onDelete={requestDelete} />
 							))
 						) : (
 							<div className="groups-page__empty">В этой группе еще нет товаров.</div>
@@ -126,9 +115,9 @@ const Groups: React.FC = () => {
 
 			<ConfirmModal
 				open={!!deleteId}
-				onClose={() => setDeleteId(null)}
-				onConfirm={handleConfirmDelete}
-				text={deleteProduct ? `Вы действительно хотите удалить продукт "${deleteProduct.name}"?` : undefined}
+				onClose={closeDeleteModal}
+				onConfirm={confirmDelete}
+				text={confirmText}
 			/>
 			<AddProductModal
 				open={isAddModalOpen}
