@@ -14,10 +14,10 @@
 
 ## Live Demo
 
-Після деплою сюди потрібно додати актуальні посилання:
+Актуальні Railway-посилання:
 
-1. Frontend URL: `TODO`
-2. Socket server URL: `TODO`
+1. Frontend URL: `https://chic-imagination-production-aa65.up.railway.app`
+2. Socket server URL: `https://dztask04-production.up.railway.app`
 
 ## Запуск
 
@@ -71,7 +71,10 @@ REACT_APP_SOCKET_URL=https://your-socket-server-url
 http://localhost:4000
 ```
 
-Це важливо при деплої frontend на окремий сервіс, наприклад Vercel, а websocket server на Render, Railway або VDS.
+У поточному деплої обидва сервіси розгорнуті на Railway як два окремі сервіси в межах одного проєкту:
+
+1. frontend: `https://chic-imagination-production-aa65.up.railway.app`
+2. websocket server: `https://dztask04-production.up.railway.app`
 
 ## Дані та API
 
