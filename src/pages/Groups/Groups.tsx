@@ -2,25 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import AddProductModal from '../../components/Groups/AddProductModal';
+import type { AddProductFormPayload } from '../../components/Groups/AddProductModal.types';
 import GroupCard from '../../components/Groups/GroupCard';
 import ProductCard from '../../components/OrderCard/ProductCard';
 import useDeleteProductModal from '../../hooks/useDeleteProductModal';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addProduct } from '../../store/productsSlice';
 import './Groups.scss';
-
-type AddProductFormPayload = {
-	name: string;
-	serialNumber: string;
-	status: 'свободен' | 'в ремонте';
-	condition: 'новый' | 'б/у';
-	type: string;
-	specification: string;
-	priceUAH: number;
-	priceUSD: number;
-	warrantyFrom: string;
-	warrantyTo: string;
-};
 
 const Groups: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -32,6 +20,12 @@ const Groups: React.FC = () => {
 	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 	const { deleteId, requestDelete, closeDeleteModal, confirmDelete, confirmText } = useDeleteProductModal(products);
 	const requestedGroupId = searchParams.get('groupId');
+
+	useEffect(() => {
+		if (!selectedGroupId && groups.length) {
+			setSelectedGroupId(groups[0].id);
+		}
+	}, [groups, selectedGroupId]);
 
 	useEffect(() => {
 		if (!requestedGroupId) return;
@@ -89,7 +83,7 @@ const Groups: React.FC = () => {
 								<div className="groups-page__panel-title">{selectedGroup.name}</div>
 								<div className="text-muted">Товаров в группе: {groupProducts.length}</div>
 								<button className="groups-page__add-trigger" type="button" onClick={() => setIsAddModalOpen(true)}>
-									<span className="groups-page__add-trigger-icon">+</span>
+								
 									<span>Добавить продукт</span>
 								</button>
 							</div>

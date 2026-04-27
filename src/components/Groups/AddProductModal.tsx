@@ -1,18 +1,12 @@
 import React, { useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import {
+  AddProductFormPayload,
+  AddProductFormValues,
+  initialAddProductFormValues,
+} from './AddProductModal.types';
+import { mapValuesToPayload, validateAddProductForm } from './AddProductModal.validation';
 import './AddProductModal.scss';
-
-type AddProductFormPayload = {
-  name: string;
-  serialNumber: string;
-  status: 'свободен' | 'в ремонте';
-  condition: 'новый' | 'б/у';
-  type: string;
-  specification: string;
-  priceUAH: number;
-  priceUSD: number;
-  warrantyFrom: string;
-  warrantyTo: string;
-};
 
 interface AddProductModalProps {
   open: boolean;
@@ -22,52 +16,62 @@ interface AddProductModalProps {
 }
 
 const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onClose, onSubmit }) => {
-  const [name, setName] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
-  const [status, setStatus] = useState<'свободен' | 'в ремонте'>('свободен');
-  const [condition, setCondition] = useState<'новый' | 'б/у'>('новый');
-  const [type, setType] = useState('');
-  const [specification, setSpecification] = useState('');
-  const [priceUAH, setPriceUAH] = useState('');
-  const [priceUSD, setPriceUSD] = useState('');
-  const [warrantyFrom, setWarrantyFrom] = useState('');
-  const [warrantyTo, setWarrantyTo] = useState('');
+  const [values, setValues] = useState<AddProductFormValues>(initialAddProductFormValues);
+  const [touchedFields, setTouchedFields] = useState<Partial<Record<keyof AddProductFormValues, boolean>>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const isValid = useMemo(
-    () => name.trim().length > 1 && serialNumber.trim().length > 2 && type.trim().length > 1,
-    [name, serialNumber, type]
-  );
+  const errors = useMemo(() => validateAddProductForm(values), [values]);
+  const isValid = Object.keys(errors).length === 0;
 
   if (!open) return null;
 
   const resetForm = () => {
-    setName('');
-    setSerialNumber('');
-    setStatus('свободен');
-    setCondition('новый');
-    setType('');
-    setSpecification('');
-    setPriceUAH('');
-    setPriceUSD('');
-    setWarrantyFrom('');
-    setWarrantyTo('');
+    setValues(initialAddProductFormValues);
+    setTouchedFields({});
+    setIsSubmitted(false);
+  };
+
+  const updateField = <FieldName extends keyof AddProductFormValues>(fieldName: FieldName, value: AddProductFormValues[FieldName]) => {
+    setValues((currentValues) => ({
+      ...currentValues,
+      [fieldName]: value,
+    }));
+  };
+
+  const handleFieldBlur = (fieldName: keyof AddProductFormValues) => {
+    setTouchedFields((currentTouchedFields) => ({
+      ...currentTouchedFields,
+      [fieldName]: true,
+    }));
+  };
+
+  const isFieldInvalid = (fieldName: keyof AddProductFormValues) => Boolean(errors[fieldName] && (touchedFields[fieldName] || isSubmitted));
+
+  const getFieldError = (fieldName: keyof AddProductFormValues) => {
+    return isFieldInvalid(fieldName) ? errors[fieldName] ?? '' : '';
+  };
+
+  const getFieldClassName = (fieldName: keyof AddProductFormValues, baseClassName: 'form-control' | 'form-select') => {
+    return `${baseClassName}${isFieldInvalid(fieldName) ? ' is-invalid' : ''}`;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!isValid) return;
-    onSubmit({
-      name: name.trim(),
-      serialNumber: serialNumber.trim(),
-      status,
-      condition,
-      type: type.trim(),
-      specification: specification.trim(),
-      priceUAH: Number(priceUAH) || 0,
-      priceUSD: Number(priceUSD) || 0,
-      warrantyFrom,
-      warrantyTo,
+    setIsSubmitted(true);
+    setTouchedFields({
+      name: true,
+      serialNumber: true,
+      type: true,
+      specification: true,
+      priceUAH: true,
+      priceUSD: true,
+      warrantyFrom: true,
+      warrantyTo: true,
     });
+
+    if (!isValid) return;
+
+    onSubmit(mapValuesToPayload(values));
     resetForm();
   };
 
@@ -76,7 +80,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
     onClose();
   };
 
-  return (
+  const modalContent = (
     <div className="add-product-modal__backdrop" onClick={handleClose}>
       <form className="add-product-modal" onClick={(event) => event.stopPropagation()} onSubmit={handleSubmit}>
         <div className="add-product-modal__header">
@@ -86,49 +90,115 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
         <div className="add-product-modal__body">
           <label className="add-product-modal__field">
             <span>Название</span>
-            <input className="form-control" value={name} onChange={(event) => setName(event.target.value)} />
+            <input
+              className={getFieldClassName('name', 'form-control')}
+              value={values.name}
+              onChange={(event) => updateField('name', event.target.value)}
+              onBlur={() => handleFieldBlur('name')}
+              aria-invalid={isFieldInvalid('name')}
+            />
+            <span className="add-product-modal__error">{getFieldError('name')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Серийный номер</span>
-            <input className="form-control" value={serialNumber} onChange={(event) => setSerialNumber(event.target.value)} />
+            <input
+              className={getFieldClassName('serialNumber', 'form-control')}
+              value={values.serialNumber}
+              onChange={(event) => updateField('serialNumber', event.target.value)}
+              onBlur={() => handleFieldBlur('serialNumber')}
+              aria-invalid={isFieldInvalid('serialNumber')}
+            />
+            <span className="add-product-modal__error">{getFieldError('serialNumber')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Тип</span>
-            <input className="form-control" value={type} onChange={(event) => setType(event.target.value)} placeholder="Например, монитор" />
+            <input
+              className={getFieldClassName('type', 'form-control')}
+              value={values.type}
+              onChange={(event) => updateField('type', event.target.value)}
+              onBlur={() => handleFieldBlur('type')}
+              placeholder="Например, монитор"
+              aria-invalid={isFieldInvalid('type')}
+            />
+            <span className="add-product-modal__error">{getFieldError('type')}</span>
           </label>
           <label className="add-product-modal__field add-product-modal__field--wide">
             <span>Спецификация</span>
-            <input className="form-control" value={specification} onChange={(event) => setSpecification(event.target.value)} placeholder={'Например, 24", FullHD, IPS'} />
+            <input
+              className={getFieldClassName('specification', 'form-control')}
+              value={values.specification}
+              onChange={(event) => updateField('specification', event.target.value)}
+              onBlur={() => handleFieldBlur('specification')}
+              placeholder={'Например, 24", FullHD, IPS'}
+              aria-invalid={isFieldInvalid('specification')}
+            />
+            <span className="add-product-modal__error">{getFieldError('specification')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Статус</span>
-            <select className="form-select" value={status} onChange={(event) => setStatus(event.target.value as 'свободен' | 'в ремонте')}>
+            <select className="form-select" value={values.status} onChange={(event) => updateField('status', event.target.value as AddProductFormValues['status'])}>
               <option value="свободен">свободен</option>
               <option value="в ремонте">в ремонте</option>
             </select>
           </label>
           <label className="add-product-modal__field">
             <span>Состояние</span>
-            <select className="form-select" value={condition} onChange={(event) => setCondition(event.target.value as 'новый' | 'б/у')}>
+            <select className="form-select" value={values.condition} onChange={(event) => updateField('condition', event.target.value as AddProductFormValues['condition'])}>
               <option value="новый">новый</option>
               <option value="б/у">б/у</option>
             </select>
           </label>
           <label className="add-product-modal__field">
             <span>Цена, UAH</span>
-            <input className="form-control" type="number" min="0" step="1" value={priceUAH} onChange={(event) => setPriceUAH(event.target.value)} />
+            <input
+              className={getFieldClassName('priceUAH', 'form-control')}
+              type="number"
+              min="0"
+              step="1"
+              value={values.priceUAH}
+              onChange={(event) => updateField('priceUAH', event.target.value)}
+              onBlur={() => handleFieldBlur('priceUAH')}
+              aria-invalid={isFieldInvalid('priceUAH')}
+            />
+            <span className="add-product-modal__error">{getFieldError('priceUAH')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Цена, USD</span>
-            <input className="form-control" type="number" min="0" step="1" value={priceUSD} onChange={(event) => setPriceUSD(event.target.value)} />
+            <input
+              className={getFieldClassName('priceUSD', 'form-control')}
+              type="number"
+              min="0"
+              step="1"
+              value={values.priceUSD}
+              onChange={(event) => updateField('priceUSD', event.target.value)}
+              onBlur={() => handleFieldBlur('priceUSD')}
+              aria-invalid={isFieldInvalid('priceUSD')}
+            />
+            <span className="add-product-modal__error">{getFieldError('priceUSD')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Гарантия с</span>
-            <input className="form-control" type="date" value={warrantyFrom} onChange={(event) => setWarrantyFrom(event.target.value)} />
+            <input
+              className={getFieldClassName('warrantyFrom', 'form-control')}
+              type="date"
+              value={values.warrantyFrom}
+              onChange={(event) => updateField('warrantyFrom', event.target.value)}
+              onBlur={() => handleFieldBlur('warrantyFrom')}
+              aria-invalid={isFieldInvalid('warrantyFrom')}
+            />
+            <span className="add-product-modal__error">{getFieldError('warrantyFrom')}</span>
           </label>
           <label className="add-product-modal__field">
             <span>Гарантия до</span>
-            <input className="form-control" type="date" value={warrantyTo} onChange={(event) => setWarrantyTo(event.target.value)} />
+            <input
+              className={getFieldClassName('warrantyTo', 'form-control')}
+              type="date"
+              value={values.warrantyTo}
+              onChange={(event) => updateField('warrantyTo', event.target.value)}
+              onBlur={() => handleFieldBlur('warrantyTo')}
+              aria-invalid={isFieldInvalid('warrantyTo')}
+            />
+            <span className="add-product-modal__error">{getFieldError('warrantyTo')}</span>
           </label>
         </div>
         <div className="add-product-modal__actions">
@@ -138,6 +208,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
       </form>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default AddProductModal;

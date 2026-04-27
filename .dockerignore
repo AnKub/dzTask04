@@ -1,0 +1,8 @@
+node_modules
+build
+npm-debug.log
+build-output.log
+.git
+.gitignore
+docs
+database

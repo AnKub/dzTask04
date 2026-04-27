@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import inventoryDataService from '../services/inventoryDataService';
 import { Product } from '../types/product';
 
 interface AddProductPayload {
@@ -22,13 +21,16 @@ interface ProductsState {
 }
 
 const initialState: ProductsState = {
-  items: inventoryDataService.getProducts(),
+  items: [],
 };
 
 const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
+    setItems(state, action: PayloadAction<Product[]>) {
+      state.items = action.payload;
+    },
     removeProduct(state, action: PayloadAction<string>) {
       state.items = state.items.filter((product) => product.id !== action.payload);
     },
@@ -56,5 +58,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { removeProduct, addProduct } = productsSlice.actions;
+export const { setItems, removeProduct, addProduct } = productsSlice.actions;
 export default productsSlice.reducer;

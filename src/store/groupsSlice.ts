@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import inventoryDataService from '../services/inventoryDataService';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Group } from '../types/group';
 
 interface GroupsState {
@@ -7,13 +6,18 @@ interface GroupsState {
 }
 
 const initialState: GroupsState = {
-  items: inventoryDataService.getGroups(),
+  items: [],
 };
 
 const groupsSlice = createSlice({
   name: 'groups',
   initialState,
-  reducers: {},
+  reducers: {
+    setItems(state, action: PayloadAction<Group[]>) {
+      state.items = action.payload;
+    },
+  },
 });
 
+export const { setItems } = groupsSlice.actions;
 export default groupsSlice.reducer;

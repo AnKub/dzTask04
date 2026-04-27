@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import inventoryDataService from '../services/inventoryDataService';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Order } from '../types/order';
 
 interface OrdersState {
@@ -7,13 +6,18 @@ interface OrdersState {
 }
 
 const initialState: OrdersState = {
-  items: inventoryDataService.getOrders(),
+  items: [],
 };
 
 const ordersSlice = createSlice({
   name: 'orders',
   initialState,
-  reducers: {},
+  reducers: {
+    setItems(state, action: PayloadAction<Order[]>) {
+      state.items = action.payload;
+    },
+  },
 });
 
+export const { setItems } = ordersSlice.actions;
 export default ordersSlice.reducer;

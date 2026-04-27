@@ -1,0 +1,43 @@
+CREATE DATABASE IF NOT EXISTS orders_products_app;
+USE orders_products_app;
+
+CREATE TABLE orders (
+  id VARCHAR(50) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE product_groups (
+  id VARCHAR(50) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE products (
+  id VARCHAR(50) NOT NULL,
+  order_id VARCHAR(50) NOT NULL,
+  group_id VARCHAR(50) NOT NULL,
+  number INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  serial_number VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  status ENUM('свободен', 'в ремонте') NOT NULL,
+  condition_state ENUM('новый', 'б/у') NOT NULL,
+  type VARCHAR(120) NOT NULL,
+  specification VARCHAR(255) NOT NULL,
+  warranty_from DATE NOT NULL,
+  warranty_to DATE NOT NULL,
+  price_uah DECIMAL(12, 2) NOT NULL DEFAULT 0,
+  price_usd DECIMAL(12, 2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_products_order FOREIGN KEY (order_id) REFERENCES orders(id),
+  CONSTRAINT fk_products_group FOREIGN KEY (group_id) REFERENCES product_groups(id)
+);

@@ -1,10 +1,12 @@
-import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import type { AppShellProps, RouteTransitionConfig } from './App.types';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
+import { useAppDispatch } from './store/hooks';
+import { loadInventoryData } from './store/inventoryThunks';
 import { store } from './store';
 import './App.scss';
 
@@ -15,6 +17,22 @@ const Products = lazy(() => import('./pages/Products/Products'));
 const Users = lazy(() => import('./pages/Users/Users'));
 const Settings = lazy(() => import('./pages/Settings/Settings'));
 const Groups = lazy(() => import('./pages/Groups/Groups'));
+
+const AppStateInitializer: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isInitializedRef = useRef(false);
+
+  useEffect(() => {
+    if (isInitializedRef.current) {
+      return;
+    }
+
+    isInitializedRef.current = true;
+    void dispatch(loadInventoryData());
+  }, [dispatch]);
+
+  return null;
+};
 
 const AppShell: React.FC<AppShellProps> = ({
   isDesktopSidebarCollapsed,
@@ -124,6 +142,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <AppStateInitializer />
       <Router>
         <AppShell
           isDesktopSidebarCollapsed={isDesktopSidebarCollapsed}
