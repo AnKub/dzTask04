@@ -2,6 +2,9 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
+ARG REACT_APP_SOCKET_URL=http://localhost:4000
+ENV REACT_APP_SOCKET_URL=$REACT_APP_SOCKET_URL
+
 COPY package*.json ./
 RUN npm ci
 

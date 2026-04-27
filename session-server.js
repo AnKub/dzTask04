@@ -8,6 +8,8 @@ const io = new Server(server, {
   },
 });
 
+const port = Number(process.env.PORT) || 4000;
+
 const emitSessionsCount = () => {
   io.emit('sessions:update', io.engine.clientsCount);
 };
@@ -20,6 +22,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  process.stdout.write('Socket server listening on http://localhost:4000\n');
+server.listen(port, () => {
+  process.stdout.write(`Socket server listening on port ${port}\n`);
 });
