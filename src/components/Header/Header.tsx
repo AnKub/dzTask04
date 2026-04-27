@@ -1,5 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import menuIcon from '../../assets/menu.svg';
+import searchIcon from '../../assets/search.svg';
 import Logo from '../Logo/Logo';
 import SearchInput from '../SearchInput/SearchInput';
 import DateTimeBlock from '../DateTimeBlock/DateTimeBlock';
@@ -44,43 +46,53 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
   }, [location.pathname, location.search, navigate]);
 
   return (
-    <header className="header">
-      <div className="header__left">
-        <Logo hideTextOnMobile />
+    <header className={`header${isMobileSearchOpen ? ' header--mobile-search-open' : ''}`}>
+      <div className="header__bar">
+        <div className="header__left">
+          <Logo hideTextOnMobile />
+        </div>
+        <div className="header__center">
+          <div className="header__search">
+            <SearchInput
+              value={searchValue}
+              onSearchChange={handleSearchChange}
+            />
+          </div>
+        </div>
+        <div className="header__right">
+          <div className="header__icons">
+            <button
+              className="header__icon header__icon--search"
+              aria-label="Пошук"
+              onClick={handleSearchIconClick}
+              tabIndex={0}
+            >
+              <img className="header__search-image" src={searchIcon} alt="" aria-hidden="true" />
+            </button>
+          </div>
+          <DateTimeBlock />
+          {showMenuButton ? (
+            <button
+              className="header__icon header__icon--menu"
+              aria-label="Меню"
+              onClick={handleMenuIconClick}
+              tabIndex={0}
+            >
+              <img className="header__menu-image" src={menuIcon} alt="" aria-hidden="true" />
+            </button>
+          ) : null}
+        </div>
       </div>
-      <div className="header__center">
-        <div className={`header__search${isMobileSearchOpen ? ' header__search--open' : ''}`}>
+      {isMobileSearchOpen ? (
+        <div className="header__mobile-search">
           <SearchInput
-            isMobile={isMobileSearchOpen}
+            isMobile
             value={searchValue}
             onSearchChange={handleSearchChange}
             onClose={() => setMobileSearchOpen(false)}
           />
         </div>
-      </div>
-      <div className="header__right">
-        <div className="header__icons">
-          <button
-            className="header__icon header__icon--search"
-            aria-label="Пошук"
-            onClick={handleSearchIconClick}
-            tabIndex={0}
-          >
-            <span className="header__icon-svg" />
-          </button>
-        </div>
-        {showMenuButton ? (
-          <button
-            className="header__icon header__icon--menu"
-            aria-label="Меню"
-            onClick={handleMenuIconClick}
-            tabIndex={0}
-          >
-            <span className="header__icon-svg" />
-          </button>
-        ) : null}
-        <DateTimeBlock />
-      </div>
+      ) : null}
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import AddProductModal from '../../components/Groups/AddProductModal';
@@ -17,20 +17,23 @@ const Groups: React.FC = () => {
 	const products = useAppSelector((state) => state.products.items);
 	const orders = useAppSelector((state) => state.orders.items);
 	const [selectedGroupId, setSelectedGroupId] = useState<string | null>(groups[0]?.id ?? null);
+	const hasInitializedSelectionRef = useRef(false);
 	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 	const { deleteId, requestDelete, closeDeleteModal, confirmDelete, confirmText } = useDeleteProductModal(products);
 	const requestedGroupId = searchParams.get('groupId');
 
 	useEffect(() => {
-		if (!selectedGroupId && groups.length) {
+		if (!hasInitializedSelectionRef.current && !requestedGroupId && !selectedGroupId && groups.length) {
+			hasInitializedSelectionRef.current = true;
 			setSelectedGroupId(groups[0].id);
 		}
-	}, [groups, selectedGroupId]);
+	}, [groups, requestedGroupId, selectedGroupId]);
 
 	useEffect(() => {
 		if (!requestedGroupId) return;
 		const hasGroup = groups.some((group) => group.id === requestedGroupId);
 		if (hasGroup) {
+			hasInitializedSelectionRef.current = true;
 			setSelectedGroupId(requestedGroupId);
 		}
 	}, [groups, requestedGroupId]);

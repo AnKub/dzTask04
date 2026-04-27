@@ -62,4 +62,38 @@
       justify-self: start;
     }
   }
+
+  @media (max-width: 760px) {
+    min-height: 96px;
+    padding: 10px;
+    grid-template-columns: 20px minmax(0, 1fr);
+    grid-template-areas:
+      'icon name'
+      'count count'
+      'date date';
+    gap: 6px;
+
+    &__icon {
+      grid-area: icon;
+      align-self: start;
+    }
+
+    &__name {
+      grid-area: name;
+      white-space: normal;
+      line-height: 1.2;
+    }
+
+    &__count {
+      grid-area: count;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 6px;
+    }
+
+    &__date {
+      grid-area: date;
+      font-size: 0.82rem;
+    }
+  }
 }

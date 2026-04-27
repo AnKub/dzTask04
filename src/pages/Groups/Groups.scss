@@ -119,6 +119,35 @@
   @media (max-width: 991px) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 759px) {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    &__panel {
+      padding: 12px;
+    }
+
+    &__panel-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 10px;
+    }
+
+    &__panel-actions {
+      justify-content: flex-end;
+      align-self: start;
+    }
+
+    &__add-trigger {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 }
 
 @keyframes groups-panel-in {

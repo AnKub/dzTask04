@@ -432,7 +432,7 @@
     }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 980px) {
     padding: 8px 8px;
 
     &__main {
@@ -469,16 +469,32 @@
     }
 
     &__groups-row {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'indicator name'
+        'icon name'
+        'status status'
+        'delete delete';
+      gap: 8px;
     }
 
     &__products-row {
-      grid-template-columns: 1fr;
-      grid-template-areas: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'indicator name'
+        'icon name'
+        'warranty condition'
+        'group order'
+        'date price'
+        'delete delete';
+      gap: 8px;
+      align-items: stretch;
     }
 
     &__status-indicator,
     &__device-icon,
+    &__name-block--groups,
+    &__meta-field--status-word,
     &__name-block--products,
     &__meta-field--warranty,
     &__meta-field--condition,
@@ -487,18 +503,86 @@
       grid-area: auto;
     }
 
-    .product-card__products-row > .product-card__meta-field:nth-of-type(3),
-    .product-card__products-row > .product-card__meta-field:nth-of-type(4),
+    &__status-indicator {
+      grid-area: indicator;
+      align-self: center;
+      justify-self: start;
+    }
+
+    &__device-icon {
+      justify-self: start;
+    }
+
+    &__groups-row > .product-card__device-icon {
+      grid-area: icon;
+      align-self: start;
+    }
+
+    &__name-block--groups {
+      grid-area: name;
+      min-width: 0;
+    }
+
+    &__groups-row > .product-card__meta-field--status-word {
+      grid-area: status;
+    }
+
+    &__name-block--products {
+      grid-area: name;
+      min-width: 0;
+    }
+
+    &__meta-field--warranty {
+      grid-area: warranty;
+    }
+
+    &__meta-field--condition {
+      grid-area: condition;
+    }
+
+    &__price--products {
+      grid-area: price;
+      align-self: stretch;
+      text-align: left;
+    }
+
+    .product-card__products-row > .product-card__meta-field:nth-of-type(3) {
+      grid-area: group;
+    }
+
+    .product-card__products-row > .product-card__meta-field:nth-of-type(4) {
+      grid-area: order;
+    }
+
     .product-card__products-row > .product-card__meta-field--date {
-      grid-area: auto;
+      grid-area: date;
     }
 
     &__products-row > * {
       justify-self: stretch;
     }
 
+    &__groups-row > * {
+      justify-self: stretch;
+    }
+
     &__delete-btn {
-      justify-self: start;
+      grid-area: delete;
+      width: 100%;
+      height: 34px;
+      border-radius: 10px;
+      background: #fff1f2;
+      box-shadow: inset 0 0 0 1px #fecdd3;
+      justify-self: stretch;
+    }
+
+    &__meta-field,
+    &__price--products {
+      min-width: 0;
+    }
+
+    &__groups-row > .product-card__delete-btn {
+      justify-self: stretch;
     }
   }
 }
