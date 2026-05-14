@@ -1,27 +1,27 @@
-// const http = require('http');
-// const { Server } = require('socket.io');
+const http = require('http');
+const { Server } = require('socket.io');
 
-// const server = http.createServer();
-// const io = new Server(server, {
-//   cors: {
-//     origin: '*',
-//   },
-// });
+const server = http.createServer();
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  },
+});
 
-// const port = Number(process.env.PORT) || 4000;
+const port = Number(process.env.PORT) || 4000;
 
-// const emitSessionsCount = () => {
-//   io.emit('sessions:update', io.engine.clientsCount);
-// };
+const emitSessionsCount = () => {
+  io.emit('sessions:update', io.engine.clientsCount);
+};
 
-// io.on('connection', (socket) => {
-//   emitSessionsCount();
+io.on('connection', (socket) => {
+  emitSessionsCount();
 
-//   socket.on('disconnect', () => {
-//     emitSessionsCount();
-//   });
-// });
+  socket.on('disconnect', () => {
+    emitSessionsCount();
+  });
+});
 
-// server.listen(port, () => {
-//   process.stdout.write(`Socket server listening on port ${port}\n`);
-// });
+server.listen(port, () => {
+  process.stdout.write(`Socket server listening on port ${port}\n`);
+});
