@@ -17,7 +17,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   value = '',
   onSearchChange,
   debounceMs = 350,
-  placeholder = 'Поиск',
+  placeholder = '',
 }) => {
   const [inputValue, setInputValue] = useState(value);
   const debouncedValue = useDebouncedValue(inputValue, debounceMs);
@@ -38,7 +38,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        aria-label="Пошук"
+        aria-label={placeholder}
       />
       {isMobile && (
         <button

@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import menuIcon from '../../assets/menu.svg';
 import searchIcon from '../../assets/search.svg';
 import Logo from '../Logo/Logo';
@@ -16,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
   const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const searchValue = useMemo(() => new URLSearchParams(location.search).get('q') ?? '', [location.search]);
 
   const handleSearchIconClick = () => {
@@ -62,8 +64,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
         <div className="header__right">
           <div className="header__icons">
             <button
-              className="header__icon header__icon--search"
-              aria-label="Пошук"
+              className="header__icon header__icon--search"           
+              aria-label={t('header.search')}
               onClick={handleSearchIconClick}
               tabIndex={0}
             >
@@ -74,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
           {showMenuButton ? (
             <button
               className="header__icon header__icon--menu"
-              aria-label="Меню"
+                aria-label={t('header.menu')}
               onClick={handleMenuIconClick}
               tabIndex={0}
             >
@@ -90,6 +92,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
             value={searchValue}
             onSearchChange={handleSearchChange}
             onClose={() => setMobileSearchOpen(false)}
+            placeholder={t('header.search')}
           />
         </div>
       ) : null}
