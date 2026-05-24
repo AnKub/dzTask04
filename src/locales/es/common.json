@@ -1,0 +1,38 @@
+{
+  "app": {
+    "loadingPage": "Cargando la página..."
+  },
+  "header": {
+    "search": "Buscar",
+    "menu": "Menú",
+    "language": "Idioma"
+  },
+  "nav": {
+    "orders": "Pedidos",
+    "products": "Productos",
+    "groups": "Grupos",
+    "users": "Usuarios",
+    "settings": "Configuración"
+  },
+  "orders": {
+    "title": "Pedidos",
+    "singleTitle": "Pedido: {{name}}",
+    "backToList": "Volver a la lista de pedidos",
+    "itemsCount": "{{count}} productos"
+  },
+  "products": {
+    "title": "Productos",
+    "empty": "No se encontraron productos"
+  },
+  "groups": {
+    "title": "Grupos",
+    "itemsInGroup": "Productos en el grupo: {{count}}",
+    "addProduct": "Agregar producto",
+    "closeList": "Cerrar lista",
+    "emptyGroup": "Todavía no hay productos en este grupo.",
+    "emptySelection": "Selecciona un grupo a la izquierda para ver los productos."
+  },
+  "datetime": {
+    "activeSessions": "Sesiones activas: {{count}}"
+  }
+}

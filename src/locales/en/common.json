@@ -1,0 +1,38 @@
+{
+  "app": {
+    "loadingPage": "Loading page..."
+  },
+  "header": {
+    "search": "Search",
+    "menu": "Menu",
+    "language": "Language"
+  },
+  "nav": {
+    "orders": "Orders",
+    "products": "Products",
+    "groups": "Groups",
+    "users": "Users",
+    "settings": "Settings"
+  },
+  "orders": {
+    "title": "Orders",
+    "singleTitle": "Order: {{name}}",
+    "backToList": "Back to orders list",
+    "itemsCount": "{{count}} items"
+  },
+  "products": {
+    "title": "Products",
+    "empty": "No products found"
+  },
+  "groups": {
+    "title": "Groups",
+    "itemsInGroup": "Products in group: {{count}}",
+    "addProduct": "Add product",
+    "closeList": "Close list",
+    "emptyGroup": "There are no products in this group yet.",
+    "emptySelection": "Select a group on the left to view products."
+  },
+  "datetime": {
+    "activeSessions": "Active sessions: {{count}}"
+  }
+}

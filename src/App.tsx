@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Provider } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import type { AppShellProps, RouteTransitionConfig } from './App.types';
 import Header from './components/Header/Header';
@@ -44,7 +45,7 @@ const AppShell: React.FC<AppShellProps> = ({
 }) => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
-
+  const { t } = useTranslation();
   const routeTransition = useMemo<RouteTransitionConfig>(() => {
     if (prefersReducedMotion) {
       return {
@@ -81,7 +82,7 @@ const AppShell: React.FC<AppShellProps> = ({
         onRequestCloseMobile={onRequestCloseMobile}
       />
       <main className="main-content">
-        <Suspense fallback={<div className="route-loader">Загрузка страницы...</div>}>
+        <Suspense fallback={<div className="route-loader">{t('app.loadingPage')}</div>}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={location.pathname}

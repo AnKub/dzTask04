@@ -1,0 +1,38 @@
+{
+  "app": {
+    "loadingPage": "Завантаження сторінки..."
+  },
+  "header": {
+    "search": "Пошук",
+    "menu": "Меню",
+    "language": "Мова"
+  },
+  "nav": {
+    "orders": "Надходження",
+    "products": "Продукти",
+    "groups": "Групи",
+    "users": "Користувачі",
+    "settings": "Налаштування"
+  },
+  "orders": {
+    "title": "Надходження",
+    "singleTitle": "Надходження: {{name}}",
+    "backToList": "Повернутися до списку надходжень",
+    "itemsCount": "{{count}} товарів"
+  },
+  "products": {
+    "title": "Продукти",
+    "empty": "Продукти не знайдено"
+  },
+  "groups": {
+    "title": "Групи",
+    "itemsInGroup": "Товарів у групі: {{count}}",
+    "addProduct": "Додати продукт",
+    "closeList": "Закрити список",
+    "emptyGroup": "У цій групі ще немає товарів.",
+    "emptySelection": "Оберіть групу ліворуч, щоб переглянути товари."
+  },
+  "datetime": {
+    "activeSessions": "Активні сесії: {{count}}"
+  }
+}
