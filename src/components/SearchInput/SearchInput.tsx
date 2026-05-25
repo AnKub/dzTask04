@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useDebouncedValue from '../../hooks/useDebouncedValue';
 import './SearchInput.scss';
 
@@ -21,6 +22,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState(value);
   const debouncedValue = useDebouncedValue(inputValue, debounceMs);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setInputValue(value);
@@ -43,7 +45,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       {isMobile && (
         <button
           className="search-input__close"
-          aria-label="Закрити пошук"
+          aria-label={t('header.closeSearch')}
           onClick={onClose}
         >
           ×
