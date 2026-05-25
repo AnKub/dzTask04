@@ -2,11 +2,12 @@
   "app": {
     "loadingPage": "Завантаження сторінки..."
   },
-  "header": {
-    "search": "Пошук",
-    "menu": "Меню",
-    "language": "Мова"
-  },
+"header": {
+  "search": "Пошук",
+  "menu": "Меню",
+  "language": "Мова",
+  "closeSearch": "Закрити пошук"
+},
   "nav": {
     "orders": "Надходження",
     "products": "Продукти",

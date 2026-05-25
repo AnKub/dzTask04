@@ -58,6 +58,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
             <SearchInput
               value={searchValue}
               onSearchChange={handleSearchChange}
+               placeholder={t('header.search')}
             />
           </div>
         </div>

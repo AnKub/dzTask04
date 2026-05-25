@@ -2,11 +2,12 @@
   "app": {
     "loadingPage": "Cargando la página..."
   },
-  "header": {
-    "search": "Buscar",
-    "menu": "Menú",
-    "language": "Idioma"
-  },
+"header": {
+  "search": "Buscar",
+  "menu": "Menú",
+  "language": "Idioma",
+  "closeSearch": "Cerrar búsqueda"
+},
   "nav": {
     "orders": "Pedidos",
     "products": "Productos",
