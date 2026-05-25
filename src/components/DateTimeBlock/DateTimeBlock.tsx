@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { subscribeToActiveSessions } from '../../services/socket';
 import './DateTimeBlock.scss';
 
-const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
 type DateTimeBlockProps = {
   activeSessions?: number;
@@ -11,6 +11,8 @@ type DateTimeBlockProps = {
 const DateTimeBlock: React.FC<DateTimeBlockProps> = ({ activeSessions = 1 }) => {
   const [now, setNow] = useState(new Date());
   const [liveSessions, setLiveSessions] = useState(activeSessions);
+  const { t, i18n } = useTranslation();
+  const weekDayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const;
 
   useEffect(() => {
     const syncNow = () => setNow(new Date());
@@ -38,23 +40,36 @@ const DateTimeBlock: React.FC<DateTimeBlockProps> = ({ activeSessions = 1 }) => 
       unsubscribe();
     };
   }, []);
+  const currentLocale = i18n.language === 'en' ? 'en-US' : i18n.language === 'es' ? 'es-ES' : 'uk-UA';
 
-  const formattedDate = useMemo(() => now.toLocaleDateString('uk-UA'), [now]);
-  const formattedTime = useMemo(() => now.toLocaleTimeString([], {
+ const formattedDate = useMemo(
+  () => now.toLocaleDateString(currentLocale),
+  [currentLocale, now]
+);
+ const formattedTime = useMemo(
+  () => now.toLocaleTimeString(currentLocale, {
     hour: '2-digit',
     minute: '2-digit',
-  }), [now]);
+  }),
+  [currentLocale, now]
+);
+
+
+const formattedWeekDay = useMemo(
+  () => t(`datetime.weekdays.${weekDayKeys[now.getDay()]}`),
+  [now, t]
+);
 
   return (
-    <div className="date-time-block" aria-label="Top menu с датой, временем и активными сессиями">
+    <div className="date-time-block" aria-label={t('datetime.label')}>
       <div className="date-time-block__content">
         <div className="date-time-block__datetime">
           <div className="date-time-block__calendar">
-            <div className="date-time-block__weekday">{weekDays[now.getDay()]}</div>
+           <div className="date-time-block__weekday">{formattedWeekDay}</div>
             <span className="date-time-block__date">{formattedDate}</span>
           </div>
           <div className="date-time-block__meta">
-            <div className="date-time-block__sessions" aria-label={`Активных сессий: ${liveSessions}`}>
+            <div className="date-time-block__sessions" aria-label={t('datetime.activeSessions', { count: liveSessions })}>
               <span className="date-time-block__sessions-dot" />
               <span className="date-time-block__sessions-count">{liveSessions}</span>
             </div>

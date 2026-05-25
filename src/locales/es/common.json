@@ -34,6 +34,16 @@
     "emptySelection": "Selecciona un grupo a la izquierda para ver los productos."
   },
   "datetime": {
-    "activeSessions": "Sesiones activas: {{count}}"
+    "label": "Menú superior con fecha, hora y sesiones activas",
+    "activeSessions": "Sesiones activas: {{count}}",
+    "weekdays": {
+      "sun": "Domingo",
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado"
+    }
   }
 }

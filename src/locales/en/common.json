@@ -33,7 +33,17 @@
     "emptyGroup": "There are no products in this group yet.",
     "emptySelection": "Select a group on the left to view products."
   },
-  "datetime": {
-    "activeSessions": "Active sessions: {{count}}"
+"datetime": {
+  "label": "Top menu with date, time and active sessions",
+  "activeSessions": "Active sessions: {{count}}",
+  "weekdays": {
+    "sun": "Sunday",
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday"
   }
+}
 }
