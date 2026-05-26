@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import AddProductModal from '../../components/Groups/AddProductModal';
 import type { AddProductFormPayload } from '../../components/Groups/AddProductModal.types';
@@ -13,6 +14,7 @@ import './Groups.scss';
 const Groups: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [searchParams] = useSearchParams();
+	const { t } = useTranslation();
 	const groups = useAppSelector((state) => state.groups.items);
 	const products = useAppSelector((state) => state.products.items);
 	const orders = useAppSelector((state) => state.orders.items);
@@ -63,7 +65,7 @@ const Groups: React.FC = () => {
 		<section className="groups-page">
 			<div className="groups-page__sidebar">
 				<div className="groups-page__title">				
-					<span>Групи / {groups.length}</span>
+					<span>{t('groups.title')} / {groups.length}</span>
 				</div>
 				<div className="groups-page__list">
 					{groups.map((group) => (
@@ -84,14 +86,14 @@ const Groups: React.FC = () => {
 						<div className="groups-page__panel-header">
 							<div className="groups-page__panel-meta">
 								<div className="groups-page__panel-title">{selectedGroup.name}</div>
-								<div className="text-muted">Товаров в группе: {groupProducts.length}</div>
+								<div className="text-muted">{t('groups.itemsInGroup', { count: groupProducts.length })}</div>
 								<button className="groups-page__add-trigger" type="button" onClick={() => setIsAddModalOpen(true)}>
 								
-									<span>Добавить продукт</span>
+									<span>{t('groups.addProduct')}</span>
 								</button>
 							</div>
 							<div className="groups-page__panel-actions">
-								<button className="groups-page__close" type="button" aria-label="Закрити список" onClick={() => setSelectedGroupId(null)}>
+								<button className="groups-page__close" type="button" aria-label={t('groups.closeList')} onClick={() => setSelectedGroupId(null)}>
 									×
 								</button>
 							</div>
@@ -102,11 +104,11 @@ const Groups: React.FC = () => {
 								<ProductCard key={product.id} product={product} variant="groups" onDelete={requestDelete} />
 							))
 						) : (
-							<div className="groups-page__empty">В этой группе еще нет товаров.</div>
+							<div className="groups-page__empty">{t('groups.emptyGroup')}</div>
 						)}
 					</div>
 				) : (
-					<div className="groups-page__panel groups-page__empty">Выберите группу слева, чтобы просмотреть товары.</div>
+					<div className="groups-page__panel groups-page__empty">{t('groups.selectGroup')}</div>
 				)}
 			</div>
 
