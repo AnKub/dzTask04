@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ProductCard from '../../components/OrderCard/ProductCard';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import useDebouncedValue from '../../hooks/useDebouncedValue';
@@ -11,6 +12,7 @@ import './Orders.scss';
 const Orders: React.FC = () => {
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
   const products = useAppSelector((state) => state.products.items);
   const groups = useAppSelector((state) => state.groups.items);
   const orders = useAppSelector((state) => state.orders.items);
@@ -98,8 +100,12 @@ const Orders: React.FC = () => {
       <div className="orders-page__header">
         <div className="orders-page__title">
           <span className="orders-page__title-badge">+</span>
-          <span>{selectedOrder ? `Приход: ${selectedOrder.name}` : `Приходы / ${filteredOrders.length}`}</span>
-        </div>
+          <span>
+            {selectedOrder
+              ? t('orders.singleTitle', { name: selectedOrder.name })
+              : `${t('orders.title')} / ${filteredOrders.length}`}
+          </span>
+         </div>
       </div>
       <div className="orders-page__stage" key={selectedOrderId ?? 'orders-list'}>
         {selectedOrder ? (
@@ -109,12 +115,12 @@ const Orders: React.FC = () => {
                 type="button"
                 className="orders-page__back-btn"
                 onClick={() => setSelectedOrderId(null)}
-                aria-label="Вернуться к списку приходов"
+                aria-label={t('orders.backToList')}
               >
                 <span className="orders-page__back-icon" aria-hidden="true" />
               </button>
               <div className="orders-page__summary">
-                <span>{selectedOrderProducts.length} товаров</span>
+               <span>{t('orders.itemsCount', { count: selectedOrderProducts.length })}</span> 
                 <span>{selectedOrderProducts.reduce((total, product) => total + product.priceUSD, 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} USD</span>
                 <span>{selectedOrderProducts.reduce((total, product) => total + product.priceUAH, 0).toLocaleString('uk-UA', { style: 'currency', currency: 'UAH', minimumFractionDigits: 0 })}</span>
               </div>
