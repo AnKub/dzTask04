@@ -17,8 +17,23 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
   const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+ const { t, i18n } = useTranslation();
   const searchValue = useMemo(() => new URLSearchParams(location.search).get('q') ?? '', [location.search]);
+  const languageOptions = [
+  { code: 'uk', label: 'UA', flag: '🇺🇦' },
+  { code: 'en', label: 'EN', flag: '🇬🇧' },
+  { code: 'es', label: 'ES', flag: '🇪🇸' },
+] as const;
+
+const currentLanguage = i18n.resolvedLanguage ?? i18n.language ?? 'uk';
+
+const handleLanguageChange = (language: 'uk' | 'en' | 'es') => {
+  if (currentLanguage === language) {
+    return;
+  }
+
+  void i18n.changeLanguage(language);
+};
 
   const handleSearchIconClick = () => {
     setMobileSearchOpen((prev) => !prev);
@@ -63,6 +78,26 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
           </div>
         </div>
         <div className="header__right">
+        <div className="header__language-switch" aria-label={t('header.language')}>
+  {languageOptions.map((language) => {
+    const isActive = currentLanguage.startsWith(language.code);
+
+    return (
+      <button
+        key={language.code}
+        type="button"
+        className={`header__language-button${isActive ? ' header__language-button--active' : ''}`}
+        onClick={() => handleLanguageChange(language.code)}
+        aria-label={t('header.changeLanguageTo', { language: t(`header.languages.${language.code}`) })}
+        aria-pressed={isActive}
+        title={t(`header.languages.${language.code}`)}
+      >
+        <span className="header__language-flag" aria-hidden="true">{language.flag}</span>
+        <span className="header__language-label">{language.label}</span>
+      </button>
+    );
+  })}
+</div>
           <div className="header__icons">
             <button
               className="header__icon header__icon--search"           
