@@ -6,7 +6,13 @@
   "search": "Пошук",
   "menu": "Меню",
   "language": "Мова",
-  "closeSearch": "Закрити пошук"
+  "closeSearch": "Закрити пошук",
+  "changeLanguageTo": "Змінити мову на {{language}}",
+  "languages": {
+    "uk": "Українська",
+    "en": "English",
+    "es": "Español"
+  }
 },
   "nav": {
     "orders": "Надходження",

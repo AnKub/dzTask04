@@ -6,7 +6,13 @@
   "search": "Buscar",
   "menu": "Menú",
   "language": "Idioma",
-  "closeSearch": "Cerrar búsqueda"
+  "closeSearch": "Cerrar búsqueda",
+  "changeLanguageTo": "Cambiar el idioma a {{language}}",
+  "languages": {
+    "uk": "Ucraniano",
+    "en": "Inglés",
+    "es": "Español"
+  }
 },
   "nav": {
     "orders": "Pedidos",
