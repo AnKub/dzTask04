@@ -50,6 +50,14 @@
     "thu": "Четвер",
     "fri": "Пʼятниця",
     "sat": "Субота"
-  }
+  },
+  "filters": {
+"type": "Тип",
+"specification": "Специфікація",
+"allTypes": "Усі типи",
+"allSpecifications": "Усі специфікації",
+"searchType": "Пошук за типом",
+"searchSpecification": "Пошук за специфікацією"
+}
 }
 }

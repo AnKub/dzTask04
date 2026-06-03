@@ -50,6 +50,14 @@
       "thu": "Jueves",
       "fri": "Viernes",
       "sat": "Sábado"
-    }
+    },
+    "filters": {
+      "type": "Tipo",
+      "specification": "Especificación",
+      "allTypes": "Todos los tipos",
+      "allSpecifications": "Todas las especificaciones",
+      "searchType": "Buscar por tipo",
+      "searchSpecification": "Buscar por especificación"
+      }
   }
 }
