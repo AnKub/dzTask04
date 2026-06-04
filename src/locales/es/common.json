@@ -59,12 +59,12 @@
       "searchType": "Buscar por tipo",
       "searchSpecification": "Buscar por especificación"
       },
-      "modal": {
-        "confirmTitle": "Confirmación",
-        "close": "Cerrar",
-        "cancel": "Cancelar",
-        "confirm": "Confirmar",
-        "deletePrompt": "¿Seguro que quieres eliminar este elemento?"
-}
-  }
+//       "modal": {
+//         "confirmTitle": "Confirmación",
+//         "close": "Cerrar",
+//         "cancel": "Cancelar",
+//         "confirm": "Confirmar",
+//         "deletePrompt": "¿Seguro que quieres eliminar este elemento?"
+// }
+//   }
 }
