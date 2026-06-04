@@ -58,6 +58,13 @@
 "allSpecifications": "All specifications",
 "searchType": "Search by type",
 "searchSpecification": "Search by specification"
+},
+"modal": {
+  "confirmTitle": "Confirmation",
+  "close": "Close",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "deletePrompt": "Are you sure you want to delete this item?"
 }
 }
 }
