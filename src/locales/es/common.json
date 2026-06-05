@@ -1,70 +1,70 @@
-{
-  "app": {
-    "loadingPage": "Cargando la página..."
-  },
-"header": {
-  "search": "Buscar",
-  "menu": "Menú",
-  "language": "Idioma",
-  "closeSearch": "Cerrar búsqueda",
-  "changeLanguageTo": "Cambiar el idioma a {{language}}",
-  "languages": {
-    "uk": "Ucraniano",
-    "en": "Inglés",
-    "es": "Español"
-  }
-},
-  "nav": {
-    "orders": "Pedidos",
-    "products": "Productos",
-    "groups": "Grupos",
-    "users": "Usuarios",
-    "settings": "Configuración"
-  },
-  "orders": {
-    "title": "Pedidos",
-    "singleTitle": "Pedido: {{name}}",
-    "backToList": "Volver a la lista de pedidos",
-    "itemsCount": "{{count}} productos"
-  },
-  "products": {
-    "title": "Productos",
-    "empty": "No se encontraron productos"
-  },
-  "groups": {
-    "title": "Grupos",
-    "itemsInGroup": "Productos en el grupo: {{count}}",
-    "addProduct": "Agregar producto",
-    "closeList": "Cerrar lista",
-    "emptyGroup": "Todavía no hay productos en este grupo.",
-    "emptySelection": "Selecciona un grupo a la izquierda para ver los productos."
-  },
-  "datetime": {
-    "label": "Menú superior con fecha, hora y sesiones activas",
-    "activeSessions": "Sesiones activas: {{count}}",
-    "weekdays": {
-      "sun": "Domingo",
-      "mon": "Lunes",
-      "tue": "Martes",
-      "wed": "Miércoles",
-      "thu": "Jueves",
-      "fri": "Viernes",
-      "sat": "Sábado"
-    },
-    "filters": {
-      "type": "Tipo",
-      "specification": "Especificación",
-      "allTypes": "Todos los tipos",
-      "allSpecifications": "Todas las especificaciones",
-      "searchType": "Buscar por tipo",
-      "searchSpecification": "Buscar por especificación"
-      },
-      "modal": {
-        "confirmTitle": "Confirmación",
-        "close": "Cerrar",
-        "cancel": "Cancelar",
-        "confirm": "Confirmar",
-        "deletePrompt": "¿Seguro que quieres eliminar este elemento?"
-}
-  }
-}
+// {
+//   "app": {
+//     "loadingPage": "Cargando la página..."
+//   },
+// "header": {
+//   "search": "Buscar",
+//   "menu": "Menú",
+//   "language": "Idioma",
+//   "closeSearch": "Cerrar búsqueda",
+//   "changeLanguageTo": "Cambiar el idioma a {{language}}",
+//   "languages": {
+//     "uk": "Ucraniano",
+//     "en": "Inglés",
+//     "es": "Español"
+//   }
+// },
+//   "nav": {
+//     "orders": "Pedidos",
+//     "products": "Productos",
+//     "groups": "Grupos",
+//     "users": "Usuarios",
+//     "settings": "Configuración"
+//   },
+//   "orders": {
+//     "title": "Pedidos",
+//     "singleTitle": "Pedido: {{name}}",
+//     "backToList": "Volver a la lista de pedidos",
+//     "itemsCount": "{{count}} productos"
+//   },
+//   "products": {
+//     "title": "Productos",
+//     "empty": "No se encontraron productos"
+//   },
+//   "groups": {
+//     "title": "Grupos",
+//     "itemsInGroup": "Productos en el grupo: {{count}}",
+//     "addProduct": "Agregar producto",
+//     "closeList": "Cerrar lista",
+//     "emptyGroup": "Todavía no hay productos en este grupo.",
+//     "emptySelection": "Selecciona un grupo a la izquierda para ver los productos."
+//   },
+//   "datetime": {
+//     "label": "Menú superior con fecha, hora y sesiones activas",
+//     "activeSessions": "Sesiones activas: {{count}}",
+//     "weekdays": {
+//       "sun": "Domingo",
+//       "mon": "Lunes",
+//       "tue": "Martes",
+//       "wed": "Miércoles",
+//       "thu": "Jueves",
+//       "fri": "Viernes",
+//       "sat": "Sábado"
+//     },
+//     "filters": {
+//       "type": "Tipo",
+//       "specification": "Especificación",
+//       "allTypes": "Todos los tipos",
+//       "allSpecifications": "Todas las especificaciones",
+//       "searchType": "Buscar por tipo",
+//       "searchSpecification": "Buscar por especificación"
+//       },
+//       "modal": {
+//         "confirmTitle": "Confirmación",
+//         "close": "Cerrar",
+//         "cancel": "Cancelar",
+//         "confirm": "Confirmar",
+//         "deletePrompt": "¿Seguro que quieres eliminar este elemento?"
+// }
+//   }
+// }
