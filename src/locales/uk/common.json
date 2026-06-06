@@ -58,6 +58,7 @@
 "allSpecifications": "Усі специфікації",
 "searchType": "Пошук за типом",
 "searchSpecification": "Пошук за специфікацією"
+}
 },
 "modal": {
   "confirmTitle": "Підтвердження",
@@ -65,6 +66,5 @@
   "cancel": "Скасувати",
   "confirm": "Підтвердити",
   "deletePrompt": "Ви дійсно хочете видалити цей елемент?"
-}
 }
 }
