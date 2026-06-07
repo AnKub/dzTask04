@@ -1,5 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProductCardDefaultViewProps } from './ProductCard.types';
+import { getConditionTranslationKey, getStatusTranslationKey } from './ProductCard.utils';
 
 const ProductCardDefaultView: React.FC<ProductCardDefaultViewProps> = ({
   product,
@@ -10,6 +12,7 @@ const ProductCardDefaultView: React.FC<ProductCardDefaultViewProps> = ({
   showDetailsToggle,
   onToggleDetails,
 }) => {
+  const { t } = useTranslation();
   const productDate = new Date(product.date);
   const shortDate = productDate.toLocaleDateString('uk-UA', { day: '2-digit', month: '2-digit' });
   const fullDate = productDate.toLocaleDateString('uk-UA');
@@ -37,18 +40,18 @@ const ProductCardDefaultView: React.FC<ProductCardDefaultViewProps> = ({
         </span>
         {isExpanded ? (
           <div className="product-card__details">
-            <span className="product-card__status">{product.status}</span>
-            <span className="product-card__warranty">Гарантия: с {product.warrantyFrom} по {product.warrantyTo}</span>
-            <span className="product-card__condition">{product.condition.toUpperCase()}</span>
+            <span className="product-card__status">{t(getStatusTranslationKey(product.status))}</span>
+            <span className="product-card__warranty">{t('productCard.warranty')}: {t('productCard.warrantyFrom')} {product.warrantyFrom} {t('productCard.warrantyTo')} {product.warrantyTo}</span>
+            <span className="product-card__condition">{t(getConditionTranslationKey(product.condition)).toUpperCase()}</span>
             {groupName ? <span className="product-card__group">{groupName}</span> : null}
-            <span className="product-card__type">Тип: {product.type}</span>
-            <span className="product-card__spec">Спецификация: {product.specification}</span>
+            <span className="product-card__type">{t('productCard.type')}: {product.type}</span>
+            <span className="product-card__spec">{t('productCard.specification')}: {product.specification}</span>
           </div>
         ) : null}
         {showDetailsToggle ? (
           <button
             className="product-card__details-btn"
-            aria-label="Детали"
+            aria-label={t('productCard.details')}
             onClick={onToggleDetails}
           >
             <span className="product-card__details-icon" />
@@ -56,7 +59,7 @@ const ProductCardDefaultView: React.FC<ProductCardDefaultViewProps> = ({
         ) : null}
         <button
           className="product-card__delete-btn"
-          aria-label="Удалить"
+          aria-label={t('productCard.delete')}
           onClick={() => onDelete(product.id)}
         >
           <span className="product-card__delete-icon" />

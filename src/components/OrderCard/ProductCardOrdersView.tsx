@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProductCardBaseProps } from './ProductCard.types';
 import { formatSlashDate } from './ProductCard.utils';
 
@@ -14,8 +15,9 @@ const ProductCardOrdersView: React.FC<ProductCardBaseProps> = ({
   showDeleteButton = true,
   onGroupOpen,
 }) => {
+  const { t } = useTranslation();
   const resolvedOrderId = orderId ?? product?.orderId;
-  const resolvedOrderName = orderName ?? product?.name ?? 'Приход';
+  const resolvedOrderName = orderName ?? product?.name ?? t('productCard.incoming');
   const resolvedOrderDate = orderDate ?? product?.date;
   const resolvedPriceUSD = priceUSD ?? product?.priceUSD ?? 0;
   const resolvedPriceUAH = priceUAH ?? product?.priceUAH ?? 0;
@@ -29,14 +31,14 @@ const ProductCardOrdersView: React.FC<ProductCardBaseProps> = ({
         <button
           className="product-card__group-link"
           type="button"
-          aria-label={resolvedOrderName ? `Открыть товары прихода ${resolvedOrderName}` : 'Открыть товары прихода'}
+          aria-label={resolvedOrderName ? t('productCard.openOrderProductsNamed', { name: resolvedOrderName }) : t('productCard.openOrderProducts')}
           onClick={() => resolvedOrderId && onGroupOpen?.(resolvedOrderId)}
         >
           <span className="product-card__group-link-icon" aria-hidden="true" />
           <span className="product-card__group-link-count">{groupCount ?? 0}</span>
         </button>
         <div className="product-card__meta-field product-card__meta-field--date-order">
-          <span className="product-card__meta-label">Дата поступления</span>
+          <span className="product-card__meta-label">{t('productCard.receivedDate')}</span>
           <span className="product-card__meta-value">{resolvedOrderDate ? formatSlashDate(resolvedOrderDate) : '—'}</span>
         </div>
         <div className="product-card__price product-card__price--orders">
@@ -50,7 +52,7 @@ const ProductCardOrdersView: React.FC<ProductCardBaseProps> = ({
         {showDeleteButton && product && onDelete ? (
           <button
             className="product-card__delete-btn"
-            aria-label="Удалить"
+            aria-label={t('productCard.delete')}
             onClick={() => onDelete(product.id)}
           >
             <span className="product-card__delete-icon" />

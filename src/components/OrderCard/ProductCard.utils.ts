@@ -5,8 +5,8 @@ export const formatSlashDate = (value: string) => {
   return `${day}/${month}/${year}`;
 };
 
-export const getConditionLabel = (condition: Product['condition']) => (condition === 'used' ? 'Б/в' : 'Новий');
+export const getConditionTranslationKey = (condition: Product['condition']) => (condition === 'used' ? 'productCard.condition.used' : 'productCard.condition.new');
 
 export const isRepairStatus = (status: Product['status']) => status === 'inRepair';
 
-export const getStatusLabel = (status: Product['status']) => (status === 'inRepair' ? 'В ремонті' : 'Вільний');
+export const getStatusTranslationKey = (status: Product['status']) => (status === 'inRepair' ? 'productCard.status.inRepair' : 'productCard.status.available');

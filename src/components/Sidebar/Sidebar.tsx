@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import SidebarAvatar from './SidebarAvatar';
 import SidebarNav from './SidebarNav';
 import SidebarToggle from './SidebarToggle';
@@ -19,6 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onToggleDesktop,
   onRequestCloseMobile,
 }) => {
+  const { t } = useTranslation();
   const sidebarClassName = [
     'sidebar',
     collapsed && !isCompactMode ? ' sidebar--collapsed' : '',
@@ -28,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {isCompactMode && isMobileOpen ? <button type="button" className="sidebar__overlay" aria-label="Закрыть меню" onClick={onRequestCloseMobile} /> : null}
+      {isCompactMode && isMobileOpen ? <button type="button" className="sidebar__overlay" aria-label={t('sidebar.closeMenu')} onClick={onRequestCloseMobile} /> : null}
       <aside className={sidebarClassName}>
         {!isCompactMode ? <SidebarToggle collapsed={collapsed} onToggle={onToggleDesktop} /> : null}
         <div className="sidebar__content">

@@ -108,7 +108,7 @@ const Groups: React.FC = () => {
 						)}
 					</div>
 				) : (
-					<div className="groups-page__panel groups-page__empty">{t('groups.selectGroup')}</div>
+							<div className="groups-page__panel groups-page__empty">{t('groups.selectGroup')}</div>
 				)}
 			</div>
 
@@ -120,7 +120,7 @@ const Groups: React.FC = () => {
 			/>
 			<AddProductModal
 				open={isAddModalOpen}
-				groupName={selectedGroup?.name ?? 'группы'}
+				groupName={selectedGroup?.name ?? t('groups.fallbackName')}
 				onClose={() => setIsAddModalOpen(false)}
 				onSubmit={handleAddProduct}
 			/>

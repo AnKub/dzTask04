@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import FilterBar from '../../components/OrderCard/FilterBar';
 import ProductCard from '../../components/OrderCard/ProductCard';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
@@ -16,6 +17,7 @@ const Products: React.FC = () => {
 	const [typeQuery, setTypeQuery] = useState('');
 	const [specificationQuery, setSpecificationQuery] = useState('');
 	const [searchParams] = useSearchParams();
+	const { t } = useTranslation();
 	const products = useAppSelector((state) => state.products.items);
 	const groups = useAppSelector((state) => state.groups.items);
 	const orders = useAppSelector((state) => state.orders.items);
@@ -70,7 +72,7 @@ const Products: React.FC = () => {
 			<div className="products-page__header">
 				<div className="products-page__title">
 					<span className="products-page__title-badge">+</span>
-					<span>Продукты / {filtered.length}</span>
+					<span>{t('products.title')} / {filtered.length}</span>
 				</div>
 			</div>
 			<FilterBar

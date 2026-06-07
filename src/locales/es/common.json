@@ -37,7 +37,9 @@
     "addProduct": "Agregar producto",
     "closeList": "Cerrar lista",
     "emptyGroup": "Todavía no hay productos en este grupo.",
-    "emptySelection": "Selecciona un grupo a la izquierda para ver los productos."
+    "emptySelection": "Selecciona un grupo a la izquierda para ver los productos.",
+    "selectGroup": "Selecciona un grupo a la izquierda para ver los productos.",
+    "fallbackName": "grupo"
   },
   "datetime": {
     "label": "Menú superior con fecha, hora y sesiones activas",
@@ -50,22 +52,59 @@
       "thu": "Jueves",
       "fri": "Viernes",
       "sat": "Sábado"
-    },
-    "filters": {
-      "type": "Tipo",
-      "specification": "Especificación",
-      "allTypes": "Todos los tipos",
-      "allSpecifications": "Todas las especificaciones",
-      "searchType": "Buscar por tipo",
-      "searchSpecification": "Buscar por especificación"
-      }     
+    }
   }, 
+  "filters": {
+    "type": "Tipo",
+    "specification": "Especificación",
+    "allTypes": "Todos los tipos",
+    "allSpecifications": "Todas las especificaciones",
+    "searchType": "Buscar por tipo",
+    "searchSpecification": "Buscar por especificación"
+  },
   "modal": {
         "confirmTitle": "Confirmación",
         "close": "Cerrar",
         "cancel": "Cancelar",
         "confirm": "Confirmar",
-        "deletePrompt": "¿Seguro que quieres eliminar este elemento?"
+        "deletePrompt": "¿Seguro que quieres eliminar este elemento?",
+        "deleteProductPrompt": "¿Seguro que quieres eliminar el producto \"{{name}}\"?"
+},
+"sidebar": {
+  "closeMenu": "Cerrar menú",
+  "avatarAlt": "Avatar predeterminado"
+},
+"users": {
+  "title": "Usuarios"
+},
+"settings": {
+  "title": "Configuración"
+},
+"productCard": {
+  "delete": "Eliminar",
+  "details": "Detalles",
+  "warranty": "Garantía",
+  "warrantyFrom": "desde",
+  "warrantyTo": "hasta",
+  "type": "Tipo",
+  "specification": "Especificación",
+  "group": "Grupo",
+  "noGroup": "Sin grupo",
+  "order": "Pedido",
+  "noOrder": "No especificado",
+  "orderDate": "Fecha del pedido",
+  "incoming": "Pedido",
+  "receivedDate": "Fecha de recepción",
+  "openOrderProducts": "Abrir productos del pedido",
+  "openOrderProductsNamed": "Abrir productos del pedido {{name}}",
+  "status": {
+    "available": "Disponible",
+    "inRepair": "En reparación"
+  },
+  "condition": {
+    "new": "Nuevo",
+    "used": "Usado"
+  }
 },
 "addProductModal": {
   "title": "Agregar producto a {{groupName}}",

@@ -37,7 +37,9 @@
     "addProduct": "Додати продукт",
     "closeList": "Закрити список",
     "emptyGroup": "У цій групі ще немає товарів.",
-    "emptySelection": "Оберіть групу ліворуч, щоб переглянути товари."
+    "emptySelection": "Оберіть групу ліворуч, щоб переглянути товари.",
+    "selectGroup": "Оберіть групу ліворуч, щоб переглянути товари.",
+    "fallbackName": "групи"
   },
   "datetime": {
   "label": "Верхнє меню з датою, часом і активними сесіями",
@@ -50,22 +52,59 @@
     "thu": "Четвер",
     "fri": "Пʼятниця",
     "sat": "Субота"
-  },
-  "filters": {
-"type": "Тип",
-"specification": "Специфікація",
-"allTypes": "Усі типи",
-"allSpecifications": "Усі специфікації",
-"searchType": "Пошук за типом",
-"searchSpecification": "Пошук за специфікацією"
-}
+  }
+},
+"filters": {
+  "type": "Тип",
+  "specification": "Специфікація",
+  "allTypes": "Усі типи",
+  "allSpecifications": "Усі специфікації",
+  "searchType": "Пошук за типом",
+  "searchSpecification": "Пошук за специфікацією"
 },
 "modal": {
   "confirmTitle": "Підтвердження",
   "close": "Закрити",
   "cancel": "Скасувати",
   "confirm": "Підтвердити",
-  "deletePrompt": "Ви дійсно хочете видалити цей елемент?"
+  "deletePrompt": "Ви дійсно хочете видалити цей елемент?",
+  "deleteProductPrompt": "Ви дійсно хочете видалити продукт \"{{name}}\"?"
+},
+"sidebar": {
+  "closeMenu": "Закрити меню",
+  "avatarAlt": "Аватар за замовчуванням"
+},
+"users": {
+  "title": "Користувачі"
+},
+"settings": {
+  "title": "Налаштування"
+},
+"productCard": {
+  "delete": "Видалити",
+  "details": "Деталі",
+  "warranty": "Гарантія",
+  "warrantyFrom": "від",
+  "warrantyTo": "до",
+  "type": "Тип",
+  "specification": "Специфікація",
+  "group": "Група",
+  "noGroup": "Без групи",
+  "order": "Надходження",
+  "noOrder": "Не вказано",
+  "orderDate": "Дата надходження",
+  "incoming": "Надходження",
+  "receivedDate": "Дата надходження",
+  "openOrderProducts": "Відкрити товари надходження",
+  "openOrderProductsNamed": "Відкрити товари надходження {{name}}",
+  "status": {
+    "available": "Вільний",
+    "inRepair": "В ремонті"
+  },
+  "condition": {
+    "new": "Новий",
+    "used": "Б/в"
+  }
 },
 "addProductModal": {
   "title": "Додати продукт до {{groupName}}",
