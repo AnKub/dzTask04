@@ -68,5 +68,37 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "deletePrompt": "Are you sure you want to delete this item?"
+},
+"addProductModal": {
+  "title": "Add product to {{groupName}}",
+  "close": "Close",
+  "fields": {
+    "name": "Name",
+    "serialNumber": "Serial number",
+    "type": "Type",
+    "specification": "Specification",
+    "status": "Status",
+    "condition": "Condition",
+    "priceUAH": "Price, UAH",
+    "priceUSD": "Price, USD",
+    "warrantyFrom": "Warranty from",
+    "warrantyTo": "Warranty to"
+  },
+  "placeholders": {
+    "type": "For example, monitor",
+    "specification": "For example, 24\", FullHD, IPS"
+  },
+  "status": {
+    "available": "available",
+    "inRepair": "in repair"
+  },
+  "condition": {
+    "new": "new",
+    "used": "used"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "submit": "Add"
+  }
 }
 }

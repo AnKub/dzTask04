@@ -66,5 +66,37 @@
   "cancel": "Скасувати",
   "confirm": "Підтвердити",
   "deletePrompt": "Ви дійсно хочете видалити цей елемент?"
+},
+"addProductModal": {
+  "title": "Додати продукт до {{groupName}}",
+  "close": "Закрити",
+  "fields": {
+    "name": "Назва",
+    "serialNumber": "Серійний номер",
+    "type": "Тип",
+    "specification": "Специфікація",
+    "status": "Статус",
+    "condition": "Стан",
+    "priceUAH": "Ціна, UAH",
+    "priceUSD": "Ціна, USD",
+    "warrantyFrom": "Гарантія від",
+    "warrantyTo": "Гарантія до"
+  },
+  "placeholders": {
+    "type": "Наприклад, монітор",
+    "specification": "Наприклад, 24\", FullHD, IPS"
+  },
+  "status": {
+    "available": "вільний",
+    "inRepair": "в ремонті"
+  },
+  "condition": {
+    "new": "новий",
+    "used": "б/в"
+  },
+  "actions": {
+    "cancel": "Скасувати",
+    "submit": "Додати"
+  }
 }
 }
