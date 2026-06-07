@@ -1,5 +1,5 @@
-export type ProductStatus = 'свободен' | 'в ремонте';
-export type ProductCondition = 'новый' | 'б/у';
+export type ProductStatus = 'available' | 'inRepair';
+export type ProductCondition = 'new' | 'used';
 
 export interface Product {
   id: string;

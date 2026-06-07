@@ -153,13 +153,6 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
             </select>
           </label>
           <label className="add-product-modal__field">
-            <span>{t('addProductModal.fields.condition')}</span>
-            <select className="form-select" value={values.condition} onChange={(event) => updateField('condition', event.target.value as AddProductFormValues['condition'])}>
-              <option value="new">{t('addProductModal.condition.new')}</option>
-              <option value="used">{t('addProductModal.condition.used')}</option>
-            </select>
-          </label>
-          <label className="add-product-modal__field">
             <span>{t('addProductModal.fields.priceUAH')}</span>
             <input
               className={getFieldClassName('priceUAH', 'form-control')}

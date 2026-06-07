@@ -12,10 +12,10 @@ describe('productsSlice', () => {
           date: '2026-04-20',
           priceUAH: 6500,
           priceUSD: 170,
-          status: 'свободен' as const,
+          status: 'available' as const,
           warrantyFrom: '2019-04-06',
           warrantyTo: '2025-04-06',
-          condition: 'б/у' as const,
+          condition: 'used' as const,
           type: 'монитор',
           specification: '24", FullHD, VA',
           orderId: 'order-1',
@@ -37,8 +37,8 @@ describe('productsSlice', () => {
       orderId: 'order-1',
       name: 'Тестовый продукт',
       serialNumber: 'SN-TEST-1',
-      status: 'свободен',
-      condition: 'б/у',
+      status: 'available',
+      condition: 'used',
       type: 'ноутбук',
       specification: '16GB RAM, 512GB SSD',
       priceUAH: 42000,
@@ -49,7 +49,7 @@ describe('productsSlice', () => {
 
     expect(nextState.items).toHaveLength(1);
     expect(nextState.items[0].name).toBe('Тестовый продукт');
-    expect(nextState.items[0].condition).toBe('б/у');
+    expect(nextState.items[0].condition).toBe('used');
     expect(nextState.items[0].type).toBe('ноутбук');
     expect(nextState.items[0].specification).toBe('16GB RAM, 512GB SSD');
     expect(nextState.items[0].priceUAH).toBe(42000);
@@ -63,10 +63,10 @@ describe('productsSlice', () => {
       orderId: 'order-1',
       name: 'Минимальный продукт',
       serialNumber: 'SN-TEST-2',
-      status: 'свободен',
+      status: 'available',
     }));
 
-    expect(nextState.items[0].condition).toBe('новый');
+    expect(nextState.items[0].condition).toBe('new');
     expect(nextState.items[0].type).toBe('добавлен вручную');
     expect(nextState.items[0].specification).toBe('базовая');
   });

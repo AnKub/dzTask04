@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductCardStrictProductProps } from './ProductCard.types';
-import { formatSlashDate, getConditionLabel } from './ProductCard.utils';
+import { formatSlashDate, getConditionLabel, getStatusLabel, isRepairStatus } from './ProductCard.utils';
 
 const ProductCardProductsView: React.FC<ProductCardStrictProductProps> = ({
   product,
@@ -12,9 +12,9 @@ const ProductCardProductsView: React.FC<ProductCardStrictProductProps> = ({
   <div className="product-card product-card--products">
     <div className="product-card__products-row">
       <span
-        className={`product-card__status-indicator product-card__status-indicator--${product.status === 'в ремонте' ? 'repair' : 'free'}`}
-        title={product.status}
-        aria-label={product.status}
+        className={`product-card__status-indicator product-card__status-indicator--${isRepairStatus(product.status) ? 'repair' : 'free'}`}
+        title={getStatusLabel(product.status)}
+        aria-label={getStatusLabel(product.status)}
       />
       <span className="product-card__device-icon" aria-hidden="true" />
       <div className="product-card__name-block product-card__name-block--products">
