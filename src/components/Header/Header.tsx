@@ -22,10 +22,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
   const languageMenuRef = useRef<HTMLDivElement | null>(null);
   const searchValue = useMemo(() => new URLSearchParams(location.search).get('q') ?? '', [location.search]);
   const languageOptions = [
-  { code: 'uk', label: 'UA', flag: '🇺🇦' },
-  { code: 'en', label: 'EN', flag: '🇬🇧' },
-  { code: 'es', label: 'ES', flag: '🇪🇸' },
-] as const;
+    { code: 'uk', shortLabel: 'UA' },
+    { code: 'en', shortLabel: 'EN' },
+    { code: 'es', shortLabel: 'ES' },
+  ] as const;
   const currentLanguage = i18n.resolvedLanguage ?? i18n.language ?? 'uk';
   const currentLanguageOption = languageOptions.find((language) => currentLanguage.startsWith(language.code)) ?? languageOptions[0];
 
@@ -99,15 +99,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
           <div className="header__language-switch" ref={languageMenuRef}>
             <button
               type="button"
-              className="header__language-trigger"
+              className={`header__language-trigger header__language-trigger--${currentLanguageOption.code}`}
               onClick={() => setLanguageMenuOpen((prev) => !prev)}
               aria-label={t('header.language')}
               aria-expanded={isLanguageMenuOpen}
               aria-haspopup="menu"
               title={t(`header.languages.${currentLanguageOption.code}`)}
             >
-              <span className="header__language-flag" aria-hidden="true">{currentLanguageOption.flag}</span>
-              <span className="header__language-label">{currentLanguageOption.label}</span>
+              <span className="header__language-code">{currentLanguageOption.shortLabel}</span>
+              <span className="header__language-label">{t(`header.languages.${currentLanguageOption.code}`)}</span>
               <span className={`header__language-caret${isLanguageMenuOpen ? ' header__language-caret--open' : ''}`} aria-hidden="true" />
             </button>
             {isLanguageMenuOpen ? (
@@ -116,13 +116,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
                   <button
                     key={language.code}
                     type="button"
-                    className="header__language-option"
+                    className={`header__language-option header__language-option--${language.code}`}
                     onClick={() => handleLanguageChange(language.code)}
                     aria-label={t('header.changeLanguageTo', { language: t(`header.languages.${language.code}`) })}
                     title={t(`header.languages.${language.code}`)}
                     role="menuitem"
                   >
-                    <span className="header__language-flag" aria-hidden="true">{language.flag}</span>
+                    <span className="header__language-code">{language.shortLabel}</span>
                     <span className="header__language-option-text">{t(`header.languages.${language.code}`)}</span>
                   </button>
                 ))}
