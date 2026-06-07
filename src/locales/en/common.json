@@ -99,6 +99,17 @@
   "actions": {
     "cancel": "Cancel",
     "submit": "Add"
+  },
+  "validation": {
+    "nameMin": "Name must contain at least 2 characters.",
+    "serialNumberMin": "Serial number must contain at least 3 characters.",
+    "typeRequired": "Specify the product type.",
+    "specificationMin": "Add a short product specification.",
+    "priceUAHNonNegative": "Price in UAH cannot be negative.",
+    "priceUSDNonNegative": "Price in USD cannot be negative.",
+    "warrantyToRequired": "Specify the warranty end date.",
+    "warrantyFromRequired": "Specify the warranty start date.",
+    "warrantyToAfterFrom": "Warranty end date cannot be earlier than the start date."
   }
 }
 }

@@ -97,6 +97,17 @@
   "actions": {
     "cancel": "Скасувати",
     "submit": "Додати"
+  },
+  "validation": {
+    "nameMin": "Назва має містити щонайменше 2 символи.",
+    "serialNumberMin": "Серійний номер має містити щонайменше 3 символи.",
+    "typeRequired": "Вкажіть тип продукту.",
+    "specificationMin": "Додайте коротку специфікацію продукту.",
+    "priceUAHNonNegative": "Ціна в UAH не може бути від'ємною.",
+    "priceUSDNonNegative": "Ціна в USD не може бути від'ємною.",
+    "warrantyToRequired": "Вкажіть дату завершення гарантії.",
+    "warrantyFromRequired": "Вкажіть дату початку гарантії.",
+    "warrantyToAfterFrom": "Дата завершення гарантії не може бути раніше дати початку."
   }
 }
 }

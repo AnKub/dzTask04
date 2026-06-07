@@ -49,7 +49,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
   const isFieldInvalid = (fieldName: keyof AddProductFormValues) => Boolean(errors[fieldName] && (touchedFields[fieldName] || isSubmitted));
 
   const getFieldError = (fieldName: keyof AddProductFormValues) => {
-    return isFieldInvalid(fieldName) ? errors[fieldName] ?? '' : '';
+    const errorKey = errors[fieldName];
+
+    return isFieldInvalid(fieldName) && errorKey ? t(errorKey) : '';
   };
 
   const getFieldClassName = (fieldName: keyof AddProductFormValues, baseClassName: 'form-control' | 'form-select') => {
@@ -138,15 +140,23 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, groupName, onCl
           <label className="add-product-modal__field">
             <span>{t('addProductModal.fields.status')}</span>
             <select className="form-select" value={values.status} onChange={(event) => updateField('status', event.target.value as AddProductFormValues['status'])}>
-              <option value="свободен">{t('addProductModal.status.available')}</option>
-              <option value="в ремонте">{t('addProductModal.status.inRepair')}</option>
+              <option value="available">{t('addProductModal.status.available')}</option>
+              <option value="inRepair">{t('addProductModal.status.inRepair')}</option>
+
+          </select>
+          </label>
+          <label className="add-product-modal__field">
+            <span>{t('addProductModal.fields.condition')}</span>
+            <select className="form-select" value={values.condition} onChange={(event) => updateField('condition', event.target.value as AddProductFormValues['condition'])}>
+              <option value="new">{t('addProductModal.condition.new')}</option>
+              <option value="used">{t('addProductModal.condition.used')}</option>
             </select>
           </label>
           <label className="add-product-modal__field">
             <span>{t('addProductModal.fields.condition')}</span>
             <select className="form-select" value={values.condition} onChange={(event) => updateField('condition', event.target.value as AddProductFormValues['condition'])}>
-              <option value="новый">{t('addProductModal.condition.new')}</option>
-              <option value="б/у">{t('addProductModal.condition.used')}</option>
+              <option value="new">{t('addProductModal.condition.new')}</option>
+              <option value="used">{t('addProductModal.condition.used')}</option>
             </select>
           </label>
           <label className="add-product-modal__field">

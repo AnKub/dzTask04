@@ -1,8 +1,11 @@
+export type ProductStatus = 'available' | 'inRepair';
+export type ProductCondition = 'new' | 'used';
+
 export type AddProductFormPayload = {
   name: string;
   serialNumber: string;
-  status: 'свободен' | 'в ремонте';
-  condition: 'новый' | 'б/у';
+  status: ProductStatus;
+  condition: ProductCondition;
   type: string;
   specification: string;
   priceUAH: number;
@@ -14,8 +17,8 @@ export type AddProductFormPayload = {
 export type AddProductFormValues = {
   name: string;
   serialNumber: string;
-  status: 'свободен' | 'в ремонте';
-  condition: 'новый' | 'б/у';
+  status: ProductStatus;
+  condition: ProductCondition;
   type: string;
   specification: string;
   priceUAH: string;
@@ -29,8 +32,8 @@ export type AddProductFormErrors = Partial<Record<keyof AddProductFormValues, st
 export const initialAddProductFormValues: AddProductFormValues = {
   name: '',
   serialNumber: '',
-  status: 'свободен',
-  condition: 'новый',
+  status: 'available',
+  condition: 'new',
   type: '',
   specification: '',
   priceUAH: '',

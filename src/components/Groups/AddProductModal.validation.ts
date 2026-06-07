@@ -6,39 +6,39 @@ export const validateAddProductForm = (values: AddProductFormValues): AddProduct
   const errors: AddProductFormErrors = {};
 
   if (values.name.trim().length < 2) {
-    errors.name = 'Название должно содержать минимум 2 символа.';
+    errors.name = 'addProductModal.validation.nameMin';
   }
 
   if (values.serialNumber.trim().length < 3) {
-    errors.serialNumber = 'Серийный номер должен содержать мин 3 символа.';
+    errors.serialNumber = 'addProductModal.validation.serialNumberMin';
   }
 
   if (values.type.trim().length < 2) {
-    errors.type = 'Укажите тип продукта.';
+    errors.type = 'addProductModal.validation.typeRequired';
   }
 
   if (values.specification.trim().length < 3) {
-    errors.specification = 'Добавьте короткую спецификацию продукта.';
+    errors.specification = 'addProductModal.validation.specificationMin';
   }
 
   if (hasNegativeNumber(values.priceUAH)) {
-    errors.priceUAH = 'Цена в UAH не может быть отрицательной.';
+    errors.priceUAH = 'addProductModal.validation.priceUAHNonNegative';
   }
 
   if (hasNegativeNumber(values.priceUSD)) {
-    errors.priceUSD = 'Цена в USD не может быть отрицательной.';
+    errors.priceUSD = 'addProductModal.validation.priceUSDNonNegative';
   }
 
   if (values.warrantyFrom && !values.warrantyTo) {
-    errors.warrantyTo = 'Укажите дату окончания гарантии.';
+    errors.warrantyTo = 'addProductModal.validation.warrantyToRequired';
   }
 
   if (!values.warrantyFrom && values.warrantyTo) {
-    errors.warrantyFrom = 'Укажите дату начала гарантии.';
+    errors.warrantyFrom = 'addProductModal.validation.warrantyFromRequired';
   }
 
   if (values.warrantyFrom && values.warrantyTo && values.warrantyTo < values.warrantyFrom) {
-    errors.warrantyTo = 'Дата окончания гарантии не может быть раньше даты начала.';
+    errors.warrantyTo = 'addProductModal.validation.warrantyToAfterFrom';
   }
 
   return errors;
