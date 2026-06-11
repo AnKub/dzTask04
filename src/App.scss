@@ -3,7 +3,13 @@
   --sidebar-width: 220px;
   --page-gap: 24px;
   min-height: 100vh;
-  background: #f4fbfd;
+  position: relative;
+  background:
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.12), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.08), transparent 24%),
+    var(--color-bg);
+  color: var(--color-text);
+  transition: var(--transition-default);
 }
 
 .app--sidebar-mobile-open {
@@ -15,7 +21,7 @@
   margin-left: var(--sidebar-width);
   padding: calc(var(--header-height) + var(--page-gap)) var(--page-gap) var(--page-gap);
   box-sizing: border-box;
-  transition: margin-left 0.3s ease, padding 0.3s ease;
+  transition: var(--transition-default);
 }
 
 .route-view {
@@ -28,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #475569;
+  color: var(--color-text-muted);
   font-size: 0.95rem;
 }
 

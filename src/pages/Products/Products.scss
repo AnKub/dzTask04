@@ -11,14 +11,14 @@
     gap: 10px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--color-text);
   }
 
   &__title-badge {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #008000;
+    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
     color: #fff;
     display: inline-flex;
     align-items: center;

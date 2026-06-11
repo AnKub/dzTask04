@@ -1,3 +1,47 @@
+:root {
+  --transition-default: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body[data-theme='dark'] {
+  --color-bg: #0f111a;
+  --color-surface: #1e2235;
+  --color-surface-strong: #282f4d;
+  --color-text: #e2e8f0;
+  --color-text-muted: #6e7b9d;
+  --color-border: #2a314d;
+  --color-accent: #a78bfa;
+  --color-accent-strong: #8b5cf6;
+  --color-success: #10b981;
+  --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(30, 34, 53, 0.7);
+  --glass-blur: blur(12px);
+  --glow-accent: 0 0 15px rgba(167, 139, 250, 0.3);
+}
+
+body[data-theme='light'] {
+  --color-bg: #f8f6f2;
+  --color-surface: #ffffff;
+  --color-surface-strong: #f0eae1;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #d97706;
+  --color-accent-strong: #b45309;
+  --color-success: #059669;
+  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-blur: blur(8px);
+  --glow-accent: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +49,53 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: var(--transition-default);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition: var(--transition-default);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.theme-fade-slide-up {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: theme-fade-slide-up 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes theme-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

@@ -14,7 +14,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, productsCount, active, onC
   const isoDate = new Date(group.date).toISOString().slice(0, 10);
 
   return (
-    <button className={`group-card${active ? ' group-card--active' : ''}`} onClick={onClick} type="button">
+    <button className={`group-card theme-fade-slide-up${active ? ' group-card--active' : ''}`} onClick={onClick} type="button">
       <span className="group-card__icon" />
       <span className="group-card__name" title={group.name}>{group.name}</span>
       <span className="group-card__count">

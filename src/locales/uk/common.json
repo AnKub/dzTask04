@@ -6,6 +6,10 @@
   "search": "Пошук",
   "menu": "Меню",
   "language": "Мова",
+  "themeLight": "Світла",
+  "themeDark": "Темна",
+  "switchToLight": "Перемкнути на світлу тему",
+  "switchToDark": "Перемкнути на темну тему",
   "closeSearch": "Закрити пошук",
   "changeLanguageTo": "Змінити мову на {{language}}",
   "languages": {

@@ -6,6 +6,10 @@
   "search": "Buscar",
   "menu": "Menú",
   "language": "Idioma",
+  "themeLight": "Clara",
+  "themeDark": "Oscura",
+  "switchToLight": "Cambiar al tema claro",
+  "switchToDark": "Cambiar al tema oscuro",
   "closeSearch": "Cerrar búsqueda",
   "changeLanguageTo": "Cambiar el idioma a {{language}}",
   "languages": {

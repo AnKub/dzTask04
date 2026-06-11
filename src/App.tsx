@@ -12,6 +12,9 @@ import { store } from './store';
 import './App.scss';
 
 const TABLET_BREAKPOINT = 1024;
+const THEME_STORAGE_KEY = 'spadz-theme';
+
+type ThemeMode = 'light' | 'dark';
 
 const Orders = lazy(() => import('./pages/Orders/Orders'));
 const Products = lazy(() => import('./pages/Products/Products'));
@@ -42,6 +45,8 @@ const AppShell: React.FC<AppShellProps> = ({
   onSidebarToggle,
   onDesktopSidebarToggle,
   onRequestCloseMobile,
+  theme,
+  onThemeToggle,
 }) => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
@@ -73,7 +78,7 @@ const AppShell: React.FC<AppShellProps> = ({
 
   return (
     <div className={`app${isDesktopSidebarCollapsed && !isCompactSidebarMode ? ' app--sidebar-collapsed' : ''}${isMobileSidebarOpen ? ' app--sidebar-mobile-open' : ''}`}>
-      <Header onMenuToggle={onSidebarToggle} showMenuButton={isCompactSidebarMode} />
+      <Header onMenuToggle={onSidebarToggle} showMenuButton={isCompactSidebarMode} theme={theme} onThemeToggle={onThemeToggle} />
       <Sidebar
         collapsed={isDesktopSidebarCollapsed}
         isCompactMode={isCompactSidebarMode}
@@ -112,6 +117,20 @@ function App() {
   const [isDesktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [isCompactSidebarMode, setCompactSidebarMode] = useState(() => window.innerWidth <= TABLET_BREAKPOINT);
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      return storedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
   useEffect(() => {
     const syncViewportMode = () => {
@@ -152,6 +171,8 @@ function App() {
           onSidebarToggle={handleSidebarToggle}
           onDesktopSidebarToggle={() => setDesktopSidebarCollapsed((prev) => !prev)}
           onRequestCloseMobile={() => setMobileSidebarOpen(false)}
+          theme={theme}
+          onThemeToggle={() => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))}
         />
       </Router>
     </Provider>

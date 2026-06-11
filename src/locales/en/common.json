@@ -6,6 +6,10 @@
   "search": "Search",
   "menu": "Menu",
   "language": "Language",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "switchToLight": "Switch to light theme",
+  "switchToDark": "Switch to dark theme",
   "closeSearch": "Close search",
   "changeLanguageTo": "Change language to {{language}}",
   "languages": {

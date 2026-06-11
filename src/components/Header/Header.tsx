@@ -11,9 +11,11 @@ import './Header.scss';
 type HeaderProps = {
   onMenuToggle: () => void;
   showMenuButton: boolean;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
+const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, onThemeToggle }) => {
   const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [isLanguageMenuOpen, setLanguageMenuOpen] = useState(false);
   const location = useLocation();
@@ -96,6 +98,16 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton }) => {
           </div>
         </div>
         <div className="header__right">
+          <button
+            type="button"
+            className={`header__theme-toggle header__theme-toggle--${theme}`}
+            onClick={onThemeToggle}
+            aria-label={theme === 'light' ? t('header.switchToDark') : t('header.switchToLight')}
+            title={theme === 'light' ? t('header.switchToDark') : t('header.switchToLight')}
+          >
+            <span className="header__theme-toggle-icon" aria-hidden="true">{theme === 'light' ? '◐' : '◑'}</span>
+            <span className="header__theme-toggle-label">{theme === 'light' ? t('header.themeLight') : t('header.themeDark')}</span>
+          </button>
           <div className="header__language-switch" ref={languageMenuRef}>
             <button
               type="button"

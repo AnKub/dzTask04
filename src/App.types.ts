@@ -7,6 +7,8 @@ export type AppShellProps = {
   onSidebarToggle: () => void;
   onDesktopSidebarToggle: () => void;
   onRequestCloseMobile: () => void;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
 };
 
 export type RouteTransitionConfig = {
