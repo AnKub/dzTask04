@@ -105,8 +105,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, on
             aria-label={theme === 'light' ? t('header.switchToDark') : t('header.switchToLight')}
             title={theme === 'light' ? t('header.switchToDark') : t('header.switchToLight')}
           >
-            <span className="header__theme-toggle-icon" aria-hidden="true">{theme === 'light' ? '◐' : '◑'}</span>
-            <span className="header__theme-toggle-label">{theme === 'light' ? t('header.themeLight') : t('header.themeDark')}</span>
+            <span className="header__theme-toggle-icon" aria-hidden="true">
+              {theme === 'light' ? '🌙' : '☀️'}
+            </span>
           </button>
           <div className="header__language-switch" ref={languageMenuRef}>
             <button
@@ -119,7 +120,6 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, on
               title={t(`header.languages.${currentLanguageOption.code}`)}
             >
               <span className="header__language-code">{currentLanguageOption.shortLabel}</span>
-              <span className="header__language-label">{t(`header.languages.${currentLanguageOption.code}`)}</span>
               <span className={`header__language-caret${isLanguageMenuOpen ? ' header__language-caret--open' : ''}`} aria-hidden="true" />
             </button>
             {isLanguageMenuOpen ? (
