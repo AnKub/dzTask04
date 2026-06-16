@@ -13,7 +13,7 @@ React + TypeScript односторінковий додаток для облі
 3. Два термінали для frontend і socket-server
 
 ## Live Demo
-
+Демо раніше працювало Ріалвей, але напевне зараз вже призупинений деплой
 - Frontend: `https://chic-imagination-production-aa65.up.railway.app`
 - Socket server: `https://dztask04-production.up.railway.app`
 
