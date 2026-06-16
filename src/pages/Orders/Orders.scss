@@ -15,14 +15,14 @@
     gap: 10px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--color-text);
   }
 
   &__title-badge {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: #008000;
+    background: #fc07e8;
     color: #fff;
     display: inline-flex;
     align-items: center;
@@ -47,7 +47,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #008000;
+    border: 1px solid #fc07e8;
     background: linear-gradient(180deg, #ffffff 0%, #f1f8f1 100%);
     display: inline-flex;
     align-items: center;
@@ -73,8 +73,8 @@
   &__back-icon {
     width: 8px;
     height: 8px;
-    border-left: 2px solid #008000;
-    border-bottom: 2px solid #008000;
+    border-left: 2px solid #fc07e8;
+    border-bottom: 2px solid #fc07e8;
     transform: rotate(45deg);
     margin-left: 4px;
   }
