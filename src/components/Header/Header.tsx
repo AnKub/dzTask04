@@ -119,8 +119,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, on
               aria-haspopup="menu"
               title={t(`header.languages.${currentLanguageOption.code}`)}
             >
-              <span className="header__language-code">{currentLanguageOption.shortLabel}</span>
-              <span className={`header__language-caret${isLanguageMenuOpen ? ' header__language-caret--open' : ''}`} aria-hidden="true" />
+                <span className="header__language-code">{currentLanguageOption.shortLabel}</span>
             </button>
             {isLanguageMenuOpen ? (
               <div className="header__language-menu" role="menu" aria-label={t('header.language')}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import logoIcon from '../../assets/logo-icon.png';
 import './Logo.scss';
 
 type LogoProps = {
@@ -7,8 +8,8 @@ type LogoProps = {
 
 const Logo: React.FC<LogoProps> = ({ hideTextOnMobile }) => (
   <div className="logo">
-    <span className="logo__icon" />
-    <span className={`logo__text${hideTextOnMobile ? ' logo__text--hide-mobile' : ''}`}>Inventory</span>
+    <img src={logoIcon} alt="Logo" className="logo__icon" />
+    <span className={`logo__text${hideTextOnMobile ? ' logo__text--hide-mobile' : ''}`}>OctopusCorp</span>
   </div>
 );
 
