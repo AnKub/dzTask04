@@ -19,7 +19,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, productsCount, active, onC
       <span className="group-card__name" title={group.name}>{group.name}</span>
       <span className="group-card__count">
         {productsCount}
-        <span className="group-card__count-label">продукта</span>
+        <span className="group-card__count-label">продукту</span>
       </span>
       <span className="group-card__date">
         {shortDate}

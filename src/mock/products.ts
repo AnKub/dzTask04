@@ -48,7 +48,7 @@ export const products: Product[] = [
     warrantyTo: '2024-02-10',
     condition: 'used',
     type: 'клавіатура',
-    specification: 'USB, мембранна',
+    specification: 'USB, мембранний',
     orderId: 'order-3',
     groupId: 'group-3',
   },

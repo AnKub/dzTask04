@@ -1,12 +1,14 @@
-export type UserRole = 'admin' | 'user' | 'guest';
+export type UserRole = 'admin' | 'user' | 'manager' | 'editor';
 export type UserStatus = 'active' | 'inactive' | 'banned';
 
 export interface User {
   id: string;
-  username: string;
+  name: string;
   email: string;
   role: UserRole;
   status: UserStatus;
-  createdAt: Date;
-  updatedAt: Date;
+  avatarUrl: string;   
+  lastLogin: string;   
+  createdAt: string;
+  updatedAt?: string;  
 }

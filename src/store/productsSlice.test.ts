@@ -35,7 +35,7 @@ describe('productsSlice', () => {
     const nextState = reducer(initialState, addProduct({
       groupId: 'group-1',
       orderId: 'order-1',
-      name: 'Тестовый продукт',
+      name: 'Тестова позиція',
       serialNumber: 'SN-TEST-1',
       status: 'available',
       condition: 'used',
@@ -48,7 +48,7 @@ describe('productsSlice', () => {
     }));
 
     expect(nextState.items).toHaveLength(1);
-    expect(nextState.items[0].name).toBe('Тестовый продукт');
+    expect(nextState.items[0].name).toBe('Тестова позиція');
     expect(nextState.items[0].condition).toBe('used');
     expect(nextState.items[0].type).toBe('ноутбук');
     expect(nextState.items[0].specification).toBe('16GB RAM, 512GB SSD');
@@ -61,13 +61,13 @@ describe('productsSlice', () => {
     const nextState = reducer(initialState, addProduct({
       groupId: 'group-1',
       orderId: 'order-1',
-      name: 'Минимальный продукт',
+      name: 'Мінімальний продукт',
       serialNumber: 'SN-TEST-2',
       status: 'available',
     }));
 
     expect(nextState.items[0].condition).toBe('new');
-    expect(nextState.items[0].type).toBe('добавлен вручную');
-    expect(nextState.items[0].specification).toBe('базовая');
+    expect(nextState.items[0].type).toBe('доданий власноруч');
+    expect(nextState.items[0].specification).toBe('базова');
   });
 });

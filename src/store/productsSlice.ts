@@ -49,8 +49,8 @@ const productsSlice = createSlice({
         warrantyFrom: action.payload.warrantyFrom || new Date().toISOString().slice(0, 10),
         warrantyTo: action.payload.warrantyTo || new Date().toISOString().slice(0, 10),
         condition: action.payload.condition ?? 'new',
-        type: action.payload.type?.trim() || 'добавлен вручную',
-        specification: action.payload.specification?.trim() || 'базовая',
+        type: action.payload.type?.trim() || 'додано власноруч',
+        specification: action.payload.specification?.trim() || 'базова',
         orderId: action.payload.orderId,
         groupId: action.payload.groupId,
       });
