@@ -2,51 +2,51 @@
   "orders": [
     {
       "id": "order-1",
-      "name": "Поставка мониторов Samsung",
+      "name": "Доставка моніторів Samsung",
       "date": "2026-04-20"
     },
     {
       "id": "order-2",
-      "name": "Поставка ноутбуков HP",
+      "name": "Доставка ноутбуків HP",
       "date": "2026-04-18"
     },
     {
       "id": "order-3",
-      "name": "Поставка клавиатур",
+      "name": "Доставка клавіатур",
       "date": "2026-04-15"
     }
   ],
   "groups": [
     {
       "id": "group-1",
-      "name": "Мониторы офиса",
+      "name": "Монітори офіса",
       "date": "2026-04-20"
     },
     {
       "id": "group-2",
-      "name": "Ноутбуки отдела продаж",
+      "name": "Ноутбуки відділу продажу",
       "date": "2026-04-18"
     },
     {
       "id": "group-3",
-      "name": "Периферия",
+      "name": "Залишкові",
       "date": "2026-04-15"
     }
   ],
   "products": [
     {
       "id": "product-1",
-      "name": "Монитор Samsung S24F350",
+      "name": "Монітор Samsung S24F350",
       "serialNumber": "SN123456789",
       "number": 101,
       "date": "2026-04-20",
       "priceUAH": 6500,
       "priceUSD": 170,
-      "status": "свободен",
+      "status": "доступний",
       "warrantyFrom": "2019-04-06",
       "warrantyTo": "2025-04-06",
       "condition": "б/у",
-      "type": "монитор",
+      "type": "монітор",
       "specification": "24\", FullHD, VA",
       "orderId": "order-1",
       "groupId": "group-1"
@@ -59,10 +59,10 @@
       "date": "2026-03-15",
       "priceUAH": 32000,
       "priceUSD": 850,
-      "status": "в ремонте",
+      "status": "в ремонті",
       "warrantyFrom": "2022-03-01",
       "warrantyTo": "2026-03-01",
-      "condition": "новый",
+      "condition": "новий",
       "type": "ноутбук",
       "specification": "15.6\", i5, 16GB RAM",
       "orderId": "order-2",
@@ -70,34 +70,34 @@
     },
     {
       "id": "product-3",
-      "name": "Клавиатура Logitech K120",
+      "name": "Клавіатура Logitech K120",
       "serialNumber": "SN555555555",
       "number": 303,
       "date": "2026-02-10",
       "priceUAH": 700,
       "priceUSD": 19,
-      "status": "свободен",
+      "status": "доступний",
       "warrantyFrom": "2021-02-10",
       "warrantyTo": "2024-02-10",
-      "condition": "б/у",
-      "type": "клавиатура",
+      "condition": "б/к",
+      "type": "клавіатура",
       "specification": "USB, мембранная",
       "orderId": "order-3",
       "groupId": "group-3"
     },
     {
       "id": "product-4",
-      "name": "Монитор Dell P2422H",
+      "name": "Монітор Dell P2422H",
       "serialNumber": "SN2468101214",
       "number": 104,
       "date": "2026-04-21",
       "priceUAH": 7300,
       "priceUSD": 182,
-      "status": "свободен",
+      "status": "доступний",
       "warrantyFrom": "2020-06-12",
       "warrantyTo": "2026-06-12",
-      "condition": "новый",
-      "type": "монитор",
+      "condition": "новий",
+      "type": "монітор",
       "specification": "24\", IPS, USB Hub",
       "orderId": "order-1",
       "groupId": "group-1"
