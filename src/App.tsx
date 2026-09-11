@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Provider } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -22,18 +22,33 @@ const Users = lazy(() => import('./pages/Users/Users'));
 const Settings = lazy(() => import('./pages/Settings/Settings'));
 const Groups = lazy(() => import('./pages/Groups/Groups'));
 
-const AppStateInitializer: React.FC = () => {
+type AppStateInitializerProps = {
+  onLoadError: () => void;
+  onLoadFinish: () => void;
+};
+
+const AppStateInitializer: React.FC<AppStateInitializerProps> = ({ onLoadError, onLoadFinish }) => {
   const dispatch = useAppDispatch();
-  const isInitializedRef = useRef(false);
 
   useEffect(() => {
-    if (isInitializedRef.current) {
-      return;
-    }
+    const controller = new AbortController();
 
-    isInitializedRef.current = true;
-    void dispatch(loadInventoryData());
-  }, [dispatch]);
+    void dispatch(loadInventoryData(controller.signal))
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === 'AbortError')) {
+          onLoadError();
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          onLoadFinish();
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [dispatch, onLoadError, onLoadFinish]);
 
   return null;
 };
@@ -42,6 +57,8 @@ const AppShell: React.FC<AppShellProps> = ({
   isDesktopSidebarCollapsed,
   isMobileSidebarOpen,
   isCompactSidebarMode,
+  inventoryLoadError,
+  isInventoryLoading,
   onSidebarToggle,
   onDesktopSidebarToggle,
   onRequestCloseMobile,
@@ -87,27 +104,31 @@ const AppShell: React.FC<AppShellProps> = ({
         onRequestCloseMobile={onRequestCloseMobile}
       />
       <main className="main-content">
-        <Suspense fallback={<div className="route-loader">{t('app.loadingPage')}</div>}>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={location.pathname}
-              className="route-view"
-              initial={routeTransition.initial}
-              animate={routeTransition.animate}
-              exit={routeTransition.exit}
-              transition={routeTransition.transition}
-            >
-              <Routes location={location}>
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/groups" element={<Groups />} />
-                <Route path="*" element={<Navigate to="/orders" replace />} />
-              </Routes>
-            </motion.div>
-          </AnimatePresence>
-        </Suspense>
+        {isInventoryLoading ? <div className="route-loader">{t('app.loadingInventory')}</div> : null}
+        {inventoryLoadError ? <div className="route-loader" role="alert">{t('app.loadingInventoryFailed')}</div> : null}
+        {!isInventoryLoading && !inventoryLoadError ? (
+          <Suspense fallback={<div className="route-loader">{t('app.loadingPage')}</div>}>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={location.pathname}
+                className="route-view"
+                initial={routeTransition.initial}
+                animate={routeTransition.animate}
+                exit={routeTransition.exit}
+                transition={routeTransition.transition}
+              >
+                <Routes location={location}>
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/groups" element={<Groups />} />
+                  <Route path="*" element={<Navigate to="/orders" replace />} />
+                </Routes>
+              </motion.div>
+            </AnimatePresence>
+          </Suspense>
+        ) : null}
       </main>
     </div>
   );
@@ -117,6 +138,8 @@ function App() {
   const [isDesktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [isCompactSidebarMode, setCompactSidebarMode] = useState(() => window.innerWidth <= TABLET_BREAKPOINT);
+  const [isInventoryLoading, setInventoryLoading] = useState(true);
+  const [inventoryLoadError, setInventoryLoadError] = useState<string | null>(null);
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
 
@@ -160,14 +183,27 @@ function App() {
     setDesktopSidebarCollapsed((prev) => !prev);
   };
 
+  const handleInventoryLoadError = useCallback(() => {
+    setInventoryLoadError('loadFailed');
+  }, []);
+
+  const handleInventoryLoadFinish = useCallback(() => {
+    setInventoryLoading(false);
+  }, []);
+
   return (
     <Provider store={store}>
-      <AppStateInitializer />
+      <AppStateInitializer
+        onLoadError={handleInventoryLoadError}
+        onLoadFinish={handleInventoryLoadFinish}
+      />
       <Router>
         <AppShell
           isDesktopSidebarCollapsed={isDesktopSidebarCollapsed}
           isMobileSidebarOpen={isMobileSidebarOpen}
           isCompactSidebarMode={isCompactSidebarMode}
+          inventoryLoadError={inventoryLoadError}
+          isInventoryLoading={isInventoryLoading}
           onSidebarToggle={handleSidebarToggle}
           onDesktopSidebarToggle={() => setDesktopSidebarCollapsed((prev) => !prev)}
           onRequestCloseMobile={() => setMobileSidebarOpen(false)}

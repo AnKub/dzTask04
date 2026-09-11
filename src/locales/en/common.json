@@ -1,6 +1,8 @@
 {
   "app": {
-    "loadingPage": "Loading page..."
+    "loadingPage": "Loading page...",
+    "loadingInventory": "Loading data...",
+    "loadingInventoryFailed": "Unable to load data. Try refreshing the page."
   },
 "header": {
   "search": "Search",

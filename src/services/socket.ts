@@ -1,6 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
 let socket: Socket | null = null;
+let activeSubscriptions = 0;
 
 const getSocket = () => {
   if (!socket) {
@@ -19,15 +20,27 @@ const getSocket = () => {
 export const subscribeToActiveSessions = (callback: (count: number) => void) => {
   const client = getSocket();
   const handleUpdate = (count: number) => callback(count);
+  let isSubscribed = true;
 
-   if (!client.connected) {
+  if (!client.connected) {
     client.connect();
-   }
+  }
 
   client.on('sessions:update', handleUpdate);
+  activeSubscriptions += 1;
 
   return () => {
+    if (!isSubscribed) {
+      return;
+    }
+
+    isSubscribed = false;
     client.off('sessions:update', handleUpdate);
+    activeSubscriptions -= 1;
+
+    if (activeSubscriptions === 0) {
+      disconnectSocket();
+    }
   };
 };
 
@@ -36,4 +49,6 @@ export const disconnectSocket = () => {
     socket.disconnect();
     socket = null;
   }
+
+  activeSubscriptions = 0;
 };

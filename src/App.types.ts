@@ -4,6 +4,8 @@ export type AppShellProps = {
   isDesktopSidebarCollapsed: boolean;
   isMobileSidebarOpen: boolean;
   isCompactSidebarMode: boolean;
+  inventoryLoadError: string | null;
+  isInventoryLoading: boolean;
   onSidebarToggle: () => void;
   onDesktopSidebarToggle: () => void;
   onRequestCloseMobile: () => void;

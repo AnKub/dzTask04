@@ -9,8 +9,8 @@ const cloneSnapshot = (snapshot: InventorySnapshot): InventorySnapshot => ({
 });
 
 export const inventoryApi = {
-  async getSnapshot(): Promise<InventorySnapshot> {
-    const response = await fetch(INVENTORY_ENDPOINT);
+  async getSnapshot(signal?: AbortSignal): Promise<InventorySnapshot> {
+    const response = await fetch(INVENTORY_ENDPOINT, { signal });
 
     if (!response.ok) {
       throw new Error(`Failed to load inventory data: ${response.status}`);
