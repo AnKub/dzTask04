@@ -81,19 +81,19 @@ const Orders: React.FC = () => {
         return true;
       }
 
-      const searchableText = [
-        product.name,
-        product.serialNumber,
-        product.type,
-        product.specification,
-        groupNames.get(product.groupId) ?? '',
-        orderNames.get(product.orderId) ?? '',
-      ].join(' ').toLowerCase();
+  //     const searchableText = [
+  //       product.name,
+  //       product.serialNumber,
+  //       product.type,
+  //       product.specification,
+  //       groupNames.get(product.groupId) ?? '',
+  //       orderNames.get(product.orderId) ?? '',
+  //     ].join(' ').toLowerCase();
 
-      return searchableText.includes(debouncedGlobalQuery);
-    }) : []),
-    [debouncedGlobalQuery, groupNames, orderNames, productsByOrderId, selectedOrderId]
-  );
+  //     return searchableText.includes(debouncedGlobalQuery);
+  //   }) : []),
+  //   [debouncedGlobalQuery, groupNames, orderNames, productsByOrderId, selectedOrderId]
+  // );
 
   return (
     <section className="orders-page">
