@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,  useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { users } from '../../mock/users';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -9,8 +9,21 @@ const Users: React.FC =()=> {
 const dispatch = useAppDispatch();
 const usersList = useAppSelector((state) => state.users.items);
 const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+const [searchQuery, setSearchQuery] = useState('');
 const { t } = useTranslation();
 const selectedUser = usersList.find((user) => user.id === selectedUserId) ?? null;
+
+const filteredUsers = useMemo(()=>{
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  if(!normalizedQuery) {
+    return usersList;
+  }
+ return usersList.filter((user) => {
+    const searchableText = `${user.name} ${user.email}`.toLowerCase();
+
+    return searchableText.includes(normalizedQuery);
+  });
+}, [searchQuery, usersList]);
 
 	useEffect(() => {
 		dispatch(setUsers(users));
