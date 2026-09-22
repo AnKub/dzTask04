@@ -33,12 +33,23 @@ return (
   <section className="users-page">
     <div className="users-page__header">
       <h1>{t('users.title')}</h1>
-      <span>{usersList.length}</span>
+    <div className="users-page__header-actions">
+    <input
+      className="users-page__search"
+      type="search"
+      value={searchQuery}
+      onChange={(event) => setSearchQuery(event.target.value)}
+      placeholder={t('header.search')}
+      aria-label={t('header.search')}
+    />
+
+    <span>{filteredUsers.length}</span>
+  </div>
     </div>
 
   <div className="users-page__workspace">
   <div className="users-page__list">
-    {usersList.map((user) => (
+    {filteredUsers.map((user) => (
       <button
         className={`users-page__item${user.id === selectedUserId ? ' users-page__item--selected' : ''}`}
         type="button"
