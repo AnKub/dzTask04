@@ -25,7 +25,29 @@
   font-weight: 700;
 }
 
-.users-page__header > span {
+.users-page__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.users-page__search {
+  min-width: 220px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.users-page__search:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: var(--glow-accent);
+}
+
+.users-page__header-actions > span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
