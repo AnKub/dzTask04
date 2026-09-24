@@ -1,5 +1,6 @@
 import React, { useEffect,  useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { UserRole, UserStatus } from '../../types/user';
 import { users } from '../../mock/users';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setUsers } from '../../store/usersSlice';
@@ -10,8 +11,10 @@ const dispatch = useAppDispatch();
 const usersList = useAppSelector((state) => state.users.items);
 const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 const [searchQuery, setSearchQuery] = useState('');
+const [roleFilter, setRoleFilter] = useState<UserRole | 'all'>('all');
+const [statusFilter, setStatusFilter] = useState<UserStatus | 'all'>('all');
 const { t } = useTranslation();
-const selectedUser = usersList.find((user) => user.id === selectedUserId) ?? null;
+
 
 const filteredUsers = useMemo(()=>{
   const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -24,7 +27,7 @@ const filteredUsers = useMemo(()=>{
     return searchableText.includes(normalizedQuery);
   });
 }, [searchQuery, usersList]);
-
+const selectedUser = filteredUsers.find((user) => user.id === selectedUserId) ?? null;
 	useEffect(() => {
 		dispatch(setUsers(users));
 	}, [dispatch]);
