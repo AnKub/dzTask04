@@ -44,9 +44,32 @@ return (
       type="search"
       value={searchQuery}
       onChange={(event) => setSearchQuery(event.target.value)}
-      placeholder={t('header.search')}
-      aria-label={t('header.search')}
+     placeholder={t('users.searchPlaceholder')}
+aria-label={t('users.searchPlaceholder')}
     />
+    <select
+  className="users-page__filter"
+  value={roleFilter}
+  onChange={(event) => setRoleFilter(event.target.value as UserRole | 'all')}
+  aria-label={t('users.roleFilterLabel')}
+>
+  <option value="all">{t('users.allRoles')}</option>
+  <option value="admin">{t('users.roles.admin')}</option>
+  <option value="manager">{t('users.roles.manager')}</option>
+  <option value="editor">{t('users.roles.editor')}</option>
+  <option value="user">{t('users.roles.user')}</option>
+</select>
+<select
+  className="users-page__filter"
+  value={statusFilter}
+  onChange={(event) => setStatusFilter(event.target.value as UserStatus | 'all')}
+  aria-label={t('users.statusFilterLabel')}
+>
+  <option value="all">{t('users.allStatuses')}</option>
+  <option value="active">{t('users.statuses.active')}</option>
+  <option value="inactive">{t('users.statuses.inactive')}</option>
+  <option value="banned">{t('users.statuses.banned')}</option>
+</select>
 
     <span>{filteredUsers.length}</span>
   </div>
