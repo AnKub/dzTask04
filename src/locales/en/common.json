@@ -83,7 +83,23 @@
   "avatarAlt": "Default avatar"
 },
 "users": {
-  "title": "Users"
+  "title": "Users",
+  "searchPlaceholder": "Search by name or email",
+  "roleFilterLabel": "Filter by role",
+  "statusFilterLabel": "Filter by status",
+  "allRoles": "All roles",
+  "allStatuses": "All statuses",
+  "roles": {
+    "admin": "Administrator",
+    "manager": "Manager",
+    "editor": "Editor",
+    "user": "User"
+  },
+  "statuses": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "banned": "Banned"
+  }
 },
 "settings": {
   "title": "Settings"

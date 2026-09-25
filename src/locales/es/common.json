@@ -81,7 +81,23 @@
   "avatarAlt": "Avatar predeterminado"
 },
 "users": {
-  "title": "Usuarios"
+  "title": "Usuarios",
+  "searchPlaceholder": "Buscar por nombre o email",
+  "roleFilterLabel": "Filtrar por rol",
+  "statusFilterLabel": "Filtrar por estado",
+  "allRoles": "Todos los roles",
+  "allStatuses": "Todos los estados",
+  "roles": {
+    "admin": "Administrador",
+    "manager": "Gerente",
+    "editor": "Editor",
+    "user": "Usuario"
+  },
+  "statuses": {
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "banned": "Bloqueado"
+  }
 },
 "settings": {
   "title": "Configuración"

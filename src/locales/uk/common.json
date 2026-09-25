@@ -81,7 +81,23 @@
   "avatarAlt": "Аватар за замовчуванням"
 },
 "users": {
-  "title": "Користувачі"
+  "title": "Користувачі",
+  "searchPlaceholder": "Пошук за ім'ям або email",
+  "roleFilterLabel": "Фільтр за роллю",
+  "statusFilterLabel": "Фільтр за статусом",
+  "allRoles": "Усі ролі",
+  "allStatuses": "Усі статуси",
+  "roles": {
+    "admin": "Адміністратор",
+    "manager": "Менеджер",
+    "editor": "Редактор",
+    "user": "Користувач"
+  },
+  "statuses": {
+    "active": "Активний",
+    "inactive": "Неактивний",
+    "banned": "Заблокований"
+  }
 },
 "settings": {
   "title": "Налаштування"
