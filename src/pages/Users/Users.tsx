@@ -16,17 +16,19 @@ const [statusFilter, setStatusFilter] = useState<UserStatus | 'all'>('all');
 const { t } = useTranslation();
 
 
-const filteredUsers = useMemo(()=>{
+const filteredUsers = useMemo(() => {
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  if(!normalizedQuery) {
-    return usersList;
-  }
- return usersList.filter((user) => {
-    const searchableText = `${user.name} ${user.email}`.toLowerCase();
 
-    return searchableText.includes(normalizedQuery);
+  return usersList.filter((user) => {
+    const searchableText = `${user.name} ${user.email}`.toLowerCase();
+    const matchesSearch = searchableText.includes(normalizedQuery);
+    const matchesRole = roleFilter === 'all' || user.role === roleFilter;
+    const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
+
+    return matchesSearch && matchesRole && matchesStatus;
   });
-}, [searchQuery, usersList]);
+}, [roleFilter, searchQuery, statusFilter, usersList]);
+
 const selectedUser = filteredUsers.find((user) => user.id === selectedUserId) ?? null;
 	useEffect(() => {
 		dispatch(setUsers(users));
