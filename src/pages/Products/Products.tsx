@@ -72,7 +72,7 @@ const Products: React.FC = () => {
 			<div className="products-page__header">
 				<div className="products-page__title">
 					<span className="products-page__title-badge">+</span>
-					<span>{t('products.title')} / {filtered.length}</span>
+					<span>{t('products.title')}</span>
 				</div>
 			</div>
 			<FilterBar

@@ -71,7 +71,6 @@ aria-label={t('users.searchPlaceholder')}
   <option value="banned">{t('users.statuses.banned')}</option>
 </select>
 
-    <span>{filteredUsers.length}</span>
   </div>
     </div>
 

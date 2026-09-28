@@ -65,7 +65,7 @@ const Groups: React.FC = () => {
 		<section className="groups-page">
 			<div className="groups-page__sidebar">
 				<div className="groups-page__title">				
-					<span>{t('groups.title')} / {groups.length}</span>
+						<span>{t('groups.title')}</span>
 				</div>
 				<div className="groups-page__list">
 					{groups.map((group) => (

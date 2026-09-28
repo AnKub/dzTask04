@@ -103,7 +103,7 @@ const Orders: React.FC = () => {
           <span>
             {selectedOrder
               ? t('orders.singleTitle', { name: selectedOrder.name })
-              : `${t('orders.title')} / ${filteredOrders.length}`}
+              : t('orders.title')}
           </span>
          </div>
       </div>
