@@ -98,6 +98,17 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, on
           </div>
         </div>
         <div className="header__right">
+          <div className="header__icons">
+            <button
+              type="button"
+              className="header__icon header__icon--search"
+              aria-label={t('header.search')}
+              onClick={handleSearchIconClick}
+              aria-expanded={isMobileSearchOpen}
+            >
+              <img className="header__search-image" src={searchIcon} alt="" aria-hidden="true" />
+            </button>
+          </div>
           <button
             type="button"
             className={`header__theme-toggle header__theme-toggle--${theme}`}
@@ -140,23 +151,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, showMenuButton, theme, on
               </div>
             ) : null}
           </div>
-          <div className="header__icons">
-            <button
-              className="header__icon header__icon--search"           
-              aria-label={t('header.search')}
-              onClick={handleSearchIconClick}
-              tabIndex={0}
-            >
-              <img className="header__search-image" src={searchIcon} alt="" aria-hidden="true" />
-            </button>
-          </div>
           <DateTimeBlock />
           {showMenuButton ? (
             <button
+              type="button"
               className="header__icon header__icon--menu"
-                aria-label={t('header.menu')}
+              aria-label={t('header.menu')}
               onClick={handleMenuIconClick}
-              tabIndex={0}
             >
               <img className="header__menu-image" src={menuIcon} alt="" aria-hidden="true" />
             </button>

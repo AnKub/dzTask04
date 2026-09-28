@@ -38,14 +38,6 @@
   &__search {
     width: 320px;
     transition: var(--transition-default);
-    @media (max-width: 760px) {
-      width: 0;
-      overflow: hidden;
-      &--open {
-        width: 80vw;
-        min-width: 180px;
-      }
-    }
   }
 
   &__right {
@@ -61,9 +53,6 @@
   &__icons {
     display: none;
     gap: 8px;
-    @media (max-width: 760px) {
-      display: flex;
-    }
   }
   &__language-switch {
     position: relative;
@@ -275,63 +264,63 @@
 
   &__icon--menu {
     display: none;
-
-    @media (max-width: 1024px) {
-      display: flex;
-      order: 3;
-      margin-left: 2px;
-    }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 1024px) {
     &__bar {
       height: 56px;
-      padding: 0 8px;
+      gap: 12px;
+      padding: 0 16px;
     }
 
     &__center {
-      flex: unset;
-      width: 0;
-    }
-    &__language-trigger {
-      min-width: 132px;
-      height: 36px;
-      padding: 0 10px;
-    }
-
-    &__theme-toggle {
-      min-width: 88px;
-      height: 36px;
-      padding: 0 10px;
-    }
-
-    &__language-label {
-      font-size: 0.72rem;
-    }
-
-    &__theme-toggle-label {
       display: none;
     }
 
-    &__language-menu {
-      right: -8px;
-      min-width: 186px;
-    }
-
-    &__search {
-      width: 0;
-      overflow: hidden;
-    }
-
     &__right {
+      flex-shrink: 0;
       gap: 8px;
+      margin-left: auto;
     }
 
     &__icons {
-      order: 1;
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    &__icon {
+      flex: 0 0 36px;
+    }
+
+    &__icon--menu {
+      display: flex;
+      margin-left: 0;
+    }
+
+    &__language-trigger {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+    }
+
+    &__theme-toggle {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      padding: 0;
+      flex: 0 0 40px;
+      border-radius: 50%;
+    }
+
+    &__language-menu {
+      min-width: 186px;
     }
 
     &__mobile-search {
+      position: absolute;
+      top: 100%;
+      left: 0;
       display: block;
       width: 100%;
       padding: 8px;
@@ -340,6 +329,24 @@
       -webkit-backdrop-filter: var(--glass-blur);
       box-shadow: var(--shadow-soft);
       border-top: 1px solid var(--color-border);
+    }
+  }
+
+  @media (max-width: 760px) {
+    &__bar {
+      padding: 0 10px;
+    }
+
+    &__right {
+      gap: 6px;
+    }
+
+    &__language-menu {
+      right: -4px;
+    }
+
+    &__mobile-search {
+      padding: 8px;
     }
   }
 }
